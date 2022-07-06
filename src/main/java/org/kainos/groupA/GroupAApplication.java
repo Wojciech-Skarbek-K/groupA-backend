@@ -4,6 +4,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.kainos.groupA.api.JobService;
 import org.kainos.groupA.api.UserService;
 
 public class GroupAApplication extends io.dropwizard.Application<GroupAConfiguration> {
@@ -31,6 +32,7 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
     public void run(final GroupAConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new UserService());
+        environment.jersey().register(new JobService());
+        environment.jersey().register(new JobService());
     }
-
 }
