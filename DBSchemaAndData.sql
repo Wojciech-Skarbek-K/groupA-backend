@@ -20,14 +20,14 @@ create table Capability(
 create table Job_Roles(
     role_id smallint primary key auto_increment,
     role_name varchar(50) not null,
-    role_description varchar(1000) not null,
+    role_description varchar(1500) not null,
     sharepoint_url varchar(1000) not null,
     cap_id smallint,
     foreign key (cap_id) references Capability(cap_id) 
 );
 
 CREATE TABLE competency( 
-   comp_id INT PRIMARY KEY, 
+   comp_id varchar(50) PRIMARY KEY, 
    apprentice VARCHAR(1500)  not null, 
    trainee VARCHAR(1500)  not null, 
    associate VARCHAR(1500)  not null, 
@@ -47,14 +47,6 @@ CREATE TABLE training(
    training VARCHAR(50) not null,
    sharepoint_url VARCHAR(1000) not null
 );
-
-   CREATE TABLE training_bands( 
-   training_id INT, 
-   band_id INT,
-   FOREIGN KEY (training_id) REFERENCES training(training_id),
-   FOREIGN KEY (band_id) REFERENCES band(band_id)
-);
-
 
 insert into 
 Capability (cap_name) 
@@ -281,13 +273,7 @@ Seeks and responds positively to feedback regarding own learning and development
 Looks for opportunities to take on new challenges while proactively supporting and encouraging others in identifying learning needs.
 
 Recognises inappropriate behaviours and challenges constructively while promoting the Kainos values. Adapting behaviours and acting in the most appropriate way to enable others to respond constructively.',
-   'Reflects on how factors such as own values, prejudices and emotions influences own judgement, behaviour, and self-belief. Uses feedback from appraisals and other sources to consider personal impact and changes behaviour. Understands personal sources of stress and wellbeing.
-
-Plans and manages own time effectively and fulfils work requirements and commitments to a high standard, without compromising own health and wellbeing. Remains calm and focused under pressure. 
-
-Proactively manages self and career and identifies personal learning needs plan and completes a broad range of formal and in formal learning opportunities by taking responsibility for own personal development and seeking opportunities for learning. Strives to put learning into practice.Clearly demonstrates that leadership and technical skills are equally valued. 
-
-Behaves in an open, honest and inclusive manner, upholding personal and organisational ethics and values. Shows respect for the needs of others and promotes equality and diversity.',
+  
 # Consultant
    'Understands own personal preferences, biases and values different cultures, backgrounds and circumstances in decision making and takes actions.Champions Kainos wellbeing offerings and provides direction to the various wellbeing guides and support available for our people.
 
@@ -603,43 +589,4 @@ INSERT INTO training (training_id, training, sharepoint_url)
    (7,'Managing Change','https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Managing-Change.aspx'), #Consultant to Manager
    (8,'Effective Decision Making ','https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Effective-Decision-Making.aspx'); #Consultant to Leader Bands
 
-# connecting table for training to band as a band can have many training and a training can have many bands
-   
-INSERT INTO training_bands (training_id, band_id)
-   VALUES
-   (1,1),
-   (1,2),
-   (1,3),
-   (1,4),
-   (1,5),
-   (1,6),
-   (1,7),
-   (2,1),
-   (2,2),
-   (2,3),
-   (2,4),
-   (2,5),
-   (2,6),
-   (2,7),
-   (3,3),
-   (3,4),
-   (3,5),
-   (3,6),
-   (3,7),
-   (4,1),
-   (4,2),
-   (4,3),
-   (4,4),
-   (4,5),
-   (5,1),
-   (5,2),
-   (5,3),
-   (5,4),
-   (6,1),
-   (7,2),
-   (7,3),
-   (5,1),
-   (8,2),
-   (8,3)
-   
- ;
+
