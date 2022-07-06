@@ -26,6 +26,35 @@ create table Job_Roles(
     foreign key (cap_id) references Capability(cap_id) 
 );
 
+CREATE TABLE competency( 
+   comp_id INT PRIMARY KEY, 
+   apprentice VARCHAR(1500)  not null, 
+   trainee VARCHAR(1500)  not null, 
+   associate VARCHAR(1500)  not null, 
+   senior_associate VARCHAR(1500)  not null, 
+   consultant VARCHAR(1500)  not null, 
+   manager VARCHAR(1500) not null, 
+   principal VARCHAR(1500) not null
+);
+
+CREATE TABLE band( 
+   band_id INT PRIMARY KEY, 
+   band_name VARCHAR(50) not null
+);
+
+CREATE TABLE training( 
+   training_id INT PRIMARY KEY, 
+   training VARCHAR(50) not null,
+   sharepoint_url VARCHAR(1000) not null
+);
+
+   CREATE TABLE training_bands( 
+   training_id INT, 
+   band_id INT,
+   FOREIGN KEY (training_id) REFERENCES training(training_id),
+   FOREIGN KEY (band_id) REFERENCES band(band_id)
+);
+
 
 insert into 
 Capability (cap_name) 
@@ -45,6 +74,8 @@ values
 ('People'),
 ('Commercial and Financial Management'),
 ('Business Services Support');
+
+# insert job roles
 
 
 insert into 
@@ -195,3 +226,420 @@ VALUES ('Trainee Test Engineer', 'As a Test Engineer (Trainee) in Kainos, you’
 
 INSERT INTO Job_Roles (role_name, role_description, sharepoint_url, cap_id) 
 VALUES ('Apprentice Software Engineer', 'Our highly-regarded scheme gives the opportunity to work for us as an Apprentice Software Engineer four days per week, while studying for a part time degree in Computing Systems one day per week, with Ulster University, Jordanstown, completing your degree in just four and a half years.', 'https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/Forms/AllItems.aspx?id=%2Fpeople%2FJob%20Specifications%2FEngineering%2FJob%20profile%20%2D%20Apprentice%20Software%20Engineer%20%28Apprentice%29%2Epdf&parent=%2Fpeople%2FJob%20Specifications%2FEngineering&p=true&ga=1', 1);
+   
+# populate band table
+   
+INSERT INTO band (band_id, band_name)
+   VALUES (1, 
+   'Principal'),
+   (2, 
+   'Manager'),
+   (3, 
+   'Consultant'),
+   (4, 
+   'Senior Associate'),
+   (5, 
+   'Associate'),
+   (6, 
+   'Trainee'),
+   (7, 
+   'Apprentice');
+
+# populate competency table
+
+INSERT INTO competency (comp_id, apprentice, trainee, associate, senior_associate, consultant, manager, principal)
+   VALUES ('Personal Performance', 
+   # Apprentice
+   'Understands own strengths and areas of development. Self-aware of own well being and seeks support where appropriate.
+
+Works with People Manager to sets and achieve goals by monitoring progress regularly against performance.
+
+Flexible and willingness to learn on the job while proactively keeping up to date with the knowledge and skills needed.
+
+Understands the company values and applies this to own principles. Is open and honest and acts respectfully with others and customers.', 
+# Trainee
+   'Understands others strengths and areas for development. Recognising diversity and its value within self and team. Proactively uses wellbeing tools to support self-regulation.
+
+Able to identify own goals and discusses these with People Manager. Understands the need to work conscientiously to achieve tasks on schedule.
+
+Identifies learning gaps and seeks out opportunities to improve skills. Open to developmental feedback from others.
+
+Demonstrates positive behaviours when dealing with others and ensures application of the values while working and representing Kainos to our customers.',
+# Associate
+   'Seeks out new challenges and opportunities that may stretch current abilities. Builds on own self-awareness of overall wellbeing.
+
+Recognises the need for SMART goals, and demonstrates a “can do” attitude, through having own internal standards of performance.
+
+Seeks out opportunities to improve skills beyond the role scope whilst also seeking regular feedback.
+
+Encourages positive behaviours in others, while role modelling the Kainos values.',
+# Senior Associate
+   'Understands and confidently articulates own learning and developmental needs and proactively seek opportunities to gain experience.Has a strong level of self-awareness and in tune with own wellbeing needs and intuitive of others.
+
+Seeks and responds positively to feedback regarding own learning and development. Approach with a willingness to take on tasks that are outside role scope.
+
+Looks for opportunities to take on new challenges while proactively supporting and encouraging others in identifying learning needs.
+
+Recognises inappropriate behaviours and challenges constructively while promoting the Kainos values. Adapting behaviours and acting in the most appropriate way to enable others to respond constructively.',
+   'Reflects on how factors such as own values, prejudices and emotions influences own judgement, behaviour, and self-belief. Uses feedback from appraisals and other sources to consider personal impact and changes behaviour. Understands personal sources of stress and wellbeing.
+
+Plans and manages own time effectively and fulfils work requirements and commitments to a high standard, without compromising own health and wellbeing. Remains calm and focused under pressure. 
+
+Proactively manages self and career and identifies personal learning needs plan and completes a broad range of formal and in formal learning opportunities by taking responsibility for own personal development and seeking opportunities for learning. Strives to put learning into practice.Clearly demonstrates that leadership and technical skills are equally valued. 
+
+Behaves in an open, honest and inclusive manner, upholding personal and organisational ethics and values. Shows respect for the needs of others and promotes equality and diversity.',
+# Consultant
+   'Understands own personal preferences, biases and values different cultures, backgrounds and circumstances in decision making and takes actions.Champions Kainos wellbeing offerings and provides direction to the various wellbeing guides and support available for our people.
+
+Consistently sets own goals and manages this independently. Making autonomous decisions and are able to ‘get on with the job’ escalating decisions only when appropriate.
+
+Identifies and addresses team or individual capability requirements and gaps to deliver current and future work. Consistently identifies and develops self and others to support talent development.
+
+Demonstrates professional and organisational values through actions and behaviours. Behaves in an inclusive manner and respects equality and diversity.',
+# Manager
+	'Reflects on how factors such as own values, prejudices and emotions influences own judgement, behaviour, and self-belief. Uses feedback from appraisals and other sources to consider personal impact and changes behaviour. Understands personal sources of stress and wellbeing. 
+
+Plans and manages own time effectively and fulfils work requirements and commitments to a high standard, without compromising own health and wellbeing. Remains calm and focused under pressure. 
+
+Proactively manages self and career and identifies personal learning needs plan and completes a broad range of formal and informal learning opportunities by taking responsibility for own personal development and seeking opportunities for learning. Strives to put learning into practice. Clearly demonstrates that leadership and technical skills are equally valued.  
+
+Behaves in an open, honest, and inclusive manner, upholding personal and organisational ethics and values. Shows respect for the needs of others and promotes equality and diversity. ',
+# Principal
+	'Uses sophisticated tools and sources to continuously learn about own leadership impact across the wider business community and improve personal effectiveness as a senior leader. Understands how pressures associated with carrying out a high-profile role impacts personally and own performance. 
+
+Remains focused on the wider Kainos strategic goals when faced with competing and, at times, conflicting demands arising from differing priorities. 
+Identifies where the need to personally get involved to achieve the most benefit for the wider organisation. 
+
+Develops through systematically scanning the external environment and exploring leading edge thinking and best practice. Applies learning to build and refresh the business. Treats challenge as a positive force for improvement. 
+
+Actively develops and protects Kainos through promoting and role modelling our values and competencies to achieve desired culture. Ensuring the business priorities maximise sustainability, equality, and diversity. '
+   ),
+   ('Working with Others', 
+   # Apprentice
+   'Understand how to respond constructively to developmental feedback from a diverse range of people and implement changes as a result.
+
+Displays high levels of enthusiasm, energy and pace to achieve performance and results.
+
+Recognises the need to build internal networks within immediate teams and projects. 
+
+Respects others by attending meetings on time and contributing where appropriate. Recognising how current role relates to others within Capability and project.', 
+	# Trainee
+   'Shares learning with the team and other colleagues, contributing to the team’s understanding. 
+ 
+Maintains consistent performance, challenging self and others to be positive and focused on achieving results, despite setbacks. Support others to work in a way that is mutually supportive.
+ 
+Builds strong working relationships within team and project teams and start to consider building a wider network. 
+
+Aware of the consequences of own behaviour and how this may affect others within the team. Supports the sharing of knowledge, information and learning with other colleagues. ',
+    # Associate
+   'Actively take opportunities to learn from a diverse range of people, to maximise performance and mentor/coach more junior colleagues. 
+
+Is creative in finding ways to learn and personally improve results, suggesting new approaches to benefit self and the team. Review progress against goals making necessary adjustments to deliver successfully. 
+
+Consistently collaborates within immediate teams and finds opportunities to build rapport and trust while supporting others.  Proactively contribute to the work of the whole team whilst building positive colleague relationships  
+ 
+Actively participates and cooperates to support others within the team to achieve common goals. Able to interact effectively in stressful or frustrating 
+situations, knowing when to step away for composure. ',
+   # Senior Associate
+   'Proactively supports the development of other team members while identifying opportunities to increase innovation to achieve team’s objectives. 
+
+Encourages both formal and informal learning opportunities, ensuring others take responsibility for own learning and share this to increase organisational capability. Support and stretches self and others to deliver agreed goals and objectives. 
+
+Effectively builds wider networks across projects, Capabilities and BUs and constructively challenges colleagues including those in positions of authority. 
+
+Encourages collaborative team working within immediate teams and across the whole business. Supports an environment where others can make mistakes and learn from it. 
+Open to giving and receiving honest feedback in order to highlight areas of improvement and recognise high performance. ',
+   # Consultant
+   'Support and empower team members through a range of activities to include coaching and mentoring. Demonstrate that leadership and technical skills are equally valued.
+ 
+Role model continuous learning and self development, evaluating own effectiveness and growth. Motivate others to achieve through challenging times. Regularly monitor and discuss own and team’s performance expectations defined within 
+the performance management system. 
+
+Builds a strong network of collaborative relationships, in order to achieve objectives, whilst supporting wider stakeholder agendas. Recognised as an active mentor and coach and can demonstrate examples of  coaching others in immediate teams to improve performance. 
+
+Encourages involvement from others to deliver through collaboration better results for Kainos. Recognises and builds on individual strengths of colleagues and team 
+members while building relationships based on trust. Consistently publicise what the team members have achieved and give feedback and recognition awards where appropriate. 
+',
+   # Manager
+	'Supports others in delivering high quality services and excellence by supporting mobilising teams and contributing to business improvement. 
+
+Seeks and acknowledges the views and inputs of others. Shows respect for the contributions and challenges of others through positive and constructive feedback. 
+
+Uses information and data about performance to identify improvements which will strengthen services. 
+
+Identifies where working and cooperating with others can result in better services. Endeavours to work collaboratively. Communicates with and listens to others, recognising different perspectives. Empathises and considers the needs and feelings of others. Gains and maintains trust and support. 
+
+Understands roles, responsibilities, and purpose within the team. Adopts a collaborative approach and respects team decisions. 
+',
+	# Principal
+	'Removes barriers to preventing business improvement and innovation across Kainos. Drives innovation and diversity and enables inclusive environments while challenging and empowering others to lead. 
+
+Improves company performance through engaging the company’s purpose both internally and externally. 
+
+Promotes an inclusive culture that enables people to perform to their best, 
+ensuring that appropriate performance management systems are in place and that performance data is systematically evaluated and fed into future plans. 
+
+Takes a strategic and objective perspective to identifying potential and capability needs of Kainos, identifying and nurturing future leaders and innovators. 
+
+Drives and delivers a culture that emphasises continuous improvement and effective team working relationships. Not afraid to lead in challenging times and make the hard decisions and communicate to the whole business with confidence and integrity. 
+'),
+   ('Setting Direction, Development and Accountability', 
+   # Apprentice
+   'Understands role, tasks and deadlines and work towards these, escalating any issues where appropriate to People/Project Manager. 
+
+Accepts personal responsibility for quality and timelines of work set. 
+
+Works to manage diary, commitments and ready to attend meetings on time. 
+
+Actively supports new initiatives and tries different ways of doing things, learning from others’ experiences.', 
+   # Trainee
+   'Plans time effectively to ensure deadlines are met, and seen to be honest, escalating in advance any issues with completing tasks within the specified time. 
+
+Takes ownership of all responsibilities within own role and honours commitments to others and to Kainos. 
+
+Effectively manages diary, coming prepared for meetings and actively listen. 
+
+Breaks down issues, and actively seeks further information and understanding. ',
+    # Associate
+   'Recognises how much time is required for different tasks and start to prioritise and communicate effectively within teams. Seeking appropriate support while supporting peers and junior team members. 
+
+Identifies commitments and proactively seeks responsibility in delivering towards the wider team and project objectives. 
+
+Establishes effective meetings through setting an agenda and coming prepared and speaking on projects calls where appropriate. Follows up and delivers upon actions from meetings.
+ 
+Makes suggestions for improvements to personal work and processes.  
+',
+   # Senior Associate
+   'A strong ability to multitask and prioritise to deadlines, overcoming obstacles to ensure the work is completed within time. Researching and communicating in advance any barriers that may affect projects. 
+
+Demonstrates individual responsibility for achieving objectives and able to 
+articulate success, failures and proposing remedial actions.
+ 
+Consistently prepared for meetings and effectively manages own diary for preparation and an agenda is set in advance. Actively seeks input from colleagues and challenges others where appropriate. 
+
+Processes and distils a variety of information to understand a problem fully while proposing options for solutions and building on the ideas of others. ',
+   # Consultant
+   'Develops effective systems to organise and track workload while, motivating and encouraging others to achieve planned results, delegating work to use people and resources to best effect. Ensuring colleagues are aware of any changing priorities and monitor progress. 
+
+Delegates authority to match responsibilities and holds staff accountable for agreed-upon commitments. Within immediate teams creates accountability by using experience and advice to guide others. 
+
+Sets an example of leading internal and external meetings through preparation, prioritisation, and considered agendas, ensuring any challenges and issues are discussed. 
+
+Seeks the opinions and experiences of others to understand different approaches while thinking laterally about own work and encouraging creative problem solving.',
+   # Manager
+	'Understands the range of factors which determine why changes are made and supports Kainos senior leaders to deliver key messages. 
+
+Gathers data and information about aspects of the business, analyses evidence and uses this knowledge to suggest changes that will improve services in the future. Questions established practices which do not add value. Puts forward creative suggestions to improve the quality of service provided. 
+
+Consults with others and contributes to decisions including the future direction/vision of own business area or projects. 
+
+Assesses the effects of change on service delivery and customer outcomes. Makes recommendations for future improvements. 
+',
+	# Principal
+	'Develops an in-depth insight into the dynamics and issues surrounding Kainos including political, economic, social, environmental, technological, and legal impacts. Fully understands the impact of change on organisation culture and proactively seeks feedback and ideas from employees and stakeholders while also empowering leaders. 
+
+Creates an environment that fosters knowledge sharing and innovation, demonstrating the courage to take risks to enable significant improvements and empowering others to do so where appropriate. Creates a culture of flexibility and responsiveness, mobilising Kainos to respond quickly to changing priorities. 
+
+Fully engages and utilises external experts wider experience and knowledge to support strategic decision making. Navigates and balances external pressures while empowering leaders and principals to shape Kainos strategy and business priorities.  
+
+Creates a culture of transparency and honesty when it comes to evaluating impact challenges and successes. Fostering an ethos of one Kainos. Scanning the broad internal and external environment and taking account of wider impact to develop long term implementation strategies that maximise opportunities to add value to customers and support sustainable growth. '),
+   ('Supporting and Delivering the Strategy', 
+   #Apprentice
+	'Understands the Kainos Vision, Strategy and Principles.
+
+	Understands the organisation structure and the purpose of Kainos.
+
+	Possess general knowledge of local cultural differences and familiar with the Kainos policy towards Diversity and Inclusion.',
+	#Trainee
+   'Recognises how to contribute to the wider organisational objectives and strategic principles. Articulates. Individual contribution to the wider Kainos objectives and uses.
+
+	Pays attention to organisational information, how well we are doing and what is changing.
+
+	Awareness of cultural differences and willingness to develop and grow understanding of global and cultural effectiveness.',
+   #Associate
+   'Articulates individual contribution to the wider Kainos objectives and uses evidence by including SMART goals that align to the Capability/BU.
+
+	Clearly defines how individual personal performance can have an impact on the business achieving the vision and objectives.
+
+	Respects differences and promotes inclusion on a transactional level. Displays appropriate ethical behaviours and acknowledges own unconscious bias.',
+   #Senior Associate
+   'Supports peers and team members in understanding the wider Kainos objectives and how we all have a role in Kainos’ success.
+
+	Recognises and reflects on how personal actions may have a wider impact on other people and teams.
+
+	Demonstrates awareness and appreciation for the global multi-dimensional and diverse perspectives of our people. Provide a protective environment within immediate teams in which colleagues can escalate any issues while demonstrating impartial application of Kainos policies, procedure and practices.',
+   #Consultant
+   'Balances own teams needs with wider organisational needs while translating the Vision and Strategy into practical and tangible goals.
+
+	Effectively ensures immediate teams understand how their work contributes to and delivers organisational priorities.
+
+	Consistently role models cultural effectiveness in the demonstration of ethical behaviours while understanding the value diversity brings to Kainos. Promoting diversity and inclusion within teams while adapting to the needs of our diverse people.',
+   #Manager
+   'Strategic awareness including an understanding and knowledge of how role and those within in immediate team fit with and support delivery of the organisational objectives.
+
+	Feeds in ideas and knowledge from immediate teams and supports the senior leaders in developing a strategy.
+
+	Support, develop and implement the strategy in immediate teams. 
+
+	Passionately advocates the strategy and vision and translates this into action and opportunities within immediate teams. Understands the need for OKR’s/KPI’s and own role in supporting and shaping in relation to immediate teams.',
+   #Executive
+   'Sets, maintains, and ensures a clear direction for Kainos with highly focused priorities and results by articulating short, medium-and long-term strategies focused on adding real value to Kainos and our customers
+
+	Creates joined up strategies and plans which help put into practice and support Kainos vision and long-term direction which are challenging yet achievable. Based upon external economic, social, technology and environmental trends.
+
+	Enables the whole company to remain focused on business priorities, irrespective of challenges. Swiftly refocuses Kainos on new priorities as changing situations dictate. Models personal resilience and accountability for achieving strategic priorities and results. Balances challenging operational and strategic priorities.
+
+	Establishes transparency and trust where results are discussed openly. Encourages and inspires the organisation to energise delivery, while driving a performance culture across Kainos and achieve results through others. Monitors and evaluates strategic outcomes, adjusting to ensure sustainability of the strategy and ongoing communication and engagement.'),
+   ('Commerciality and Risk', 
+	#Apprentice
+	'Understands the Kainos Vision, Strategy and Principles.
+
+	Understands the organisation structure and the purpose of Kainos.
+
+	Possess general knowledge of local cultural differences and familiar with the Kainos policy towards Diversity and Inclusion.',
+	#Trainee
+   'Recognises how to contribute to the wider organisational objectives and strategic principles.
+
+	Pays attention to organisational information, how well we are doing and what is changing.
+
+	Awareness of cultural differences and willingness to develop and grow understanding of global and cultural effectiveness.',
+   #Associate
+   'Articulates individual contribution to the wider Kainos objectives and uses evidence by including SMART goals that align to the Capability/BU.
+
+	Clearly defines how individual personal performance can have an impact on the business achieving the vision and objectives.
+
+	Respects differences and promotes inclusion on a transactional level. Displays appropriate ethical behaviours and acknowledges own unconscious bias.',
+   #Senior Associate
+   'Supports peers and team members in understanding the wider Kainos objectives and how we all have a role in Kainos’ success.
+
+	Recognises and reflects on how personal actions may have a wider impact on other people and teams.
+
+	Demonstrates awareness and appreciation for the global multi-dimensional and diverse perspectives of our people. Provide a protective environment within immediate teams in which colleagues can escalate any issues while demonstrating impartial application of Kainos policies, procedure and practices.',
+   #Consultant
+   'Balances own teams needs with wider organisational needs while translating the Vision and Strategy into practical and tangible goals.
+
+	Effectively ensures immediate teams understand how their work contributes to and delivers organisational priorities.
+
+	Consistently role models cultural effectiveness in the demonstration of ethical behaviours while understanding the value diversity brings to Kainos. Promoting diversity and inclusion within teams while adapting to the needs of our diverse people.',
+   #Manager
+   'Aware of the importance of effective commercial behaviours and the needs of the business. Identifies and ensures that personal objectives are focussed on innovative solutions to achieve commercial outcomes and objectives as well as contributing to our growth ambitions. Recognises when products or services are not being  delivered to the required level of quality or standard and takes appropriate action. 
+
+	Contributes to development of new business through involvement in BD process, for example, bid/proposal writing, customer presentations, pricing solutions. Establishes trusted customer relationships and adds value by helping and advising customers in areas beyond current project work, identifying possible areas where additional Kainos business can be generated.
+
+	Looks to support and drive efficiencies and profitability through immediate team. Reviews processes within own teams and challenges through the right behaviours and channels to support the overall commercial objectives. 
+
+	Understands and protects Kainos from risks associated with contractual commitments. Takes a balanced risk and reward view to activities and commitments while managing quality and Kainos interests. 
+
+	Supports and aligns to Kainos policies and processes escalating or challenging where appropriate. Ensures compliance across own team.',
+   #Executive
+   'Role models leadership, influencing and accountability in relation to commerciality and risks to create and deliver the corporate plan. Creates and embeds a culture of commercial awareness and solid business acumen, ensuring that all employees understand the commercial environment in which we operate and can pro- actively play a part in delivering change, efficiency and growth. 
+
+	Role model for others to follow. Inspires staff across the whole organisation to contribute to BD and celebrate its success. Champions BD, promoting Kainos at levels including internal ‘all hands’, partners, investors, customers and senior figureheads within regions. Takes responsibility for strategic investment decisions, for example, acquisitions, new markets, new regions.
+
+	Draws on insights of current and future marketplace dynamics to seize opportunities to stimulate sustainable growth. Drives and delivers a continuous pipeline of innovation through our business models, products, and services ensuring sustainable commercial growth. 
+
+	Makes and encourages strategic investment decisions, challenging to ensure appropriate levels of expenditure and maximise return. Demonstrates transparency both in terms of key investment decisions and appropriate use of resources. Initiates and build strategic commercial relationships with the shareholder, partners, customers, and competitors to deliver results. 
+
+	Sets clear direction against all processes and policies and ensures we continue to develop and adapt to the ever-evolving risks and changes to the needs of the whole business.'
+),
+   ('Communicating and Influence',
+   #Apprentice
+   'Acts in a respectful manner in all forms of communication while being open and honest. Displays a positive approach when interacting with others.
+
+	Recognises influencing as a key skill required to work effectively with internal and external customers.
+
+	Acts in accordance with the Kainos values demonstrating through own behaviours and interactions with colleagues and customers.', 
+    #Trainee
+   'Communicates own views in a clear and constructive manner, while listening to different views and considers all employees from various backgrounds.
+
+	Observes team/colleagues influencing internally and externally and understands the benefits of adapting personal style to shape, motivate and influence effectively.
+
+	Understands who our customers are and what problems the team is trying to solve.',
+   #Associate
+   'Involved at meetings, asking questions, listening and develops and presents a well-reasoned point of view. Remaining communicative and clear in own thoughts and ideas when approached by others, giving consideration to the communication needs of other staff and customers.
+
+	Demonstrates influencing skills internally and able to communicate points clearly and open to feedback from others.
+
+	Demonstrates how to participate in stakeholder management, escalates effectively, and strives to provide a quality service and showcase Kainos positively.',
+   #Senior Associate
+   'Recognises and respect that communication is a two-way process and demonstrate effective questioning and active listening skills to achieve this. Confidently handles challenging conversations and is clear and constructive in response.
+
+	Persuades and influences with sound rationale argument ‘appealing to others’ interest or reason to gain support.
+
+	Authentic in stakeholder relationships and take pride in being inclusive and trustworthy while keeping promises made with customers. Responds honestly and promptly to customer requests and whenever possible within agreed timeframes.',
+   #Consultant
+   'Uses communication to create a shared sense of purpose and direction. Adapting own style to effectively communicate and able to demonstrate this when difficult conversations have a positive outcome.
+
+	Acts as an influential and effective member of multi-disciplinary teams or projects. Initiates collaboration and actively encourages people to cooperate in initiatives where they can add value.
+
+	Assesses customer needs accurately by listening and applying sensitive questioning. Managing customer expectations in relation to scope of work and are honest in what can and cannot be achieved within timescales. Confident in negotiating with customers to reflect changes in scope of work.',
+   #Manager
+   'Provides feedback and support in communicating the vision, and advocates within immediate teams.
+
+	Credible communicator, displaying authenticity and adapting influencing style for different audiences.
+
+	Articulates the need for changes to processes and systems, acknowledging the impact on people and services.
+
+	Applies and adapts various approaches to stakeholder management through influencing and negotiating to maximise business for Kainos by developing and maintaining internal and external networks.',
+   #Executive
+   'Actively engages key stakeholders in creating a bold, innovative, shared vision which reflects the future needs and aspirations of the whole company and the future direction of Kainos. Thinks broadly and aligns the vision to the Kainos values and communicates gaining buy in.
+
+	Takes action to shape and implement a vision for the future of Kainos and our customers while sharing leadership and empowering others to contribute and collaborate.
+
+	Empowers senior leaders within Kainos to drive change and transformation while providing direction and creating a collaborative environment for sustained change.
+
+	Builds a strong network of collaborative relationships and partnerships globally to achieve our objectives, whist supporting wider stakeholder agendas. Utilises the experience and input of external partners, non-executive directors, and industry experts to improve effectiveness.')
+;
+
+# populate training table
+
+INSERT INTO training (training_id, training, sharepoint_url)
+   VALUES (1, 'Mindset Module', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Mindset.aspx'), # all bands
+   (2, 'Hybrid Working – A guide to working remotely', 'https://kainos.talentlms.com/learner/courseinfo/id:275'), # all bands
+   (3, 'Effective Time Management', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Time-Management.aspx'), # 7-3
+   (4, 'Train The Trainer', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Train-The-Trainer.aspx'), #  Associate Level Plus 
+   (5, 'Having Courageous Conversations', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Crucial-Conversations.aspx'), #Senior Associates Plus
+   (6,'Leading Change','https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Leading-Change.aspx'), #Principal to Leader
+   (7,'Managing Change','https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Managing-Change.aspx'), #Consultant to Manager
+   (8,'Effective Decision Making ','https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Effective-Decision-Making.aspx'); #Consultant to Leader Bands
+
+# connecting table for training to band as a band can have many training and a training can have many bands
+   
+INSERT INTO training_bands (training_id, band_id)
+   VALUES
+   (1,1),
+   (1,2),
+   (1,3),
+   (1,4),
+   (1,5),
+   (1,6),
+   (1,7),
+   (2,1),
+   (2,2),
+   (2,3),
+   (2,4),
+   (2,5),
+   (2,6),
+   (2,7),
+   (3,3),
+   (3,4),
+   (3,5),
+   (3,6),
+   (3,7),
+   (4,1),
+   (4,2),
+   (4,3),
+   (4,4),
+   (4,5),
+   (5,1),
+   (5,2),
+   (5,3),
+   (5,4),
+   (6,1),
+   (7,2),
+   (7,3),
+   (5,1),
+   (8,2),
+   (8,3)
+   
+ ;
