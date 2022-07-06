@@ -50,7 +50,6 @@ public class DB {
 
     public static List<JobRole> getJobRoles() throws SQLException {
         Connection c = getConnection();
-
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(
                 "SELECT * " + "FROM Job_Roles;");
@@ -59,14 +58,15 @@ public class DB {
 
         while (rs.next()) {
             JobRole job = new JobRole(
-                    rs.getString("name"),
-                    rs.getString("description"),
-                    rs.getString("sharepoint url"),
-                    rs.getInt("cap id")
+                    rs.getString("role_name"),
+                    rs.getString("role_description"),
+                    rs.getString("sharepoint_url"),
+                    rs.getInt("cap_id")
             );
 
             jobs.add(job);
         }
+        System.out.println(jobs);
         return jobs;
     }
 }
