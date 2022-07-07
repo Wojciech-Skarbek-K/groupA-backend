@@ -1,6 +1,7 @@
 package org.kainos.groupA.api;
 
 import io.swagger.annotations.Api;
+import org.kainos.groupA.api.models.JobRole;
 import org.kainos.groupA.db.DB;
 
 import javax.ws.rs.GET;

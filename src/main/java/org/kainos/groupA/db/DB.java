@@ -1,6 +1,6 @@
 package org.kainos.groupA.db;
 
-import org.kainos.groupA.api.JobRole;
+import org.kainos.groupA.api.models.JobRole;
 
 import java.io.FileInputStream;
 import java.sql.*;

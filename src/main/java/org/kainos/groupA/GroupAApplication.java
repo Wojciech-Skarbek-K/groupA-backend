@@ -33,6 +33,5 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
                     final Environment environment) {
         environment.jersey().register(new UserService());
         environment.jersey().register(new JobService());
-        environment.jersey().register(new JobService());
     }
 }
