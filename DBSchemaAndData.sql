@@ -28,13 +28,13 @@ create table Job_Roles(
 
 CREATE TABLE competency( 
    comp_id varchar(50) PRIMARY KEY, 
-   apprentice VARCHAR(1500)  not null, 
-   trainee VARCHAR(1500)  not null, 
-   associate VARCHAR(1500)  not null, 
-   senior_associate VARCHAR(1500)  not null, 
-   consultant VARCHAR(1500)  not null, 
-   manager VARCHAR(1500) not null, 
-   principal VARCHAR(1500) not null
+   apprentice VARCHAR(2000)  not null, 
+   trainee VARCHAR(2000)  not null, 
+   associate VARCHAR(2000)  not null, 
+   senior_associate VARCHAR(2000)  not null, 
+   consultant VARCHAR(2000)  not null, 
+   manager VARCHAR(2000) not null, 
+   principal VARCHAR(2000) not null
 );
 
 CREATE TABLE band( 
@@ -46,6 +46,13 @@ CREATE TABLE training(
    training_id INT PRIMARY KEY, 
    training VARCHAR(50) not null,
    sharepoint_url VARCHAR(1000) not null
+);
+
+ CREATE TABLE training_bands( 
+   training_id INT, 
+   band_id INT,
+   FOREIGN KEY (training_id) REFERENCES training(training_id),
+   FOREIGN KEY (band_id) REFERENCES band(band_id)
 );
 
 insert into 
@@ -589,4 +596,42 @@ INSERT INTO training (training_id, training, sharepoint_url)
    (7,'Managing Change','https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Managing-Change.aspx'), #Consultant to Manager
    (8,'Effective Decision Making ','https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Effective-Decision-Making.aspx'); #Consultant to Leader Bands
 
-
+# connecting table for training to band as a band can have many training and a training can have many bands
+   
+INSERT INTO training_bands (training_id, band_id)
+   VALUES
+   (1,1),
+   (1,2),
+   (1,3),
+   (1,4),
+   (1,5),
+   (1,6),
+   (1,7),
+   (2,1),
+   (2,2),
+   (2,3),
+   (2,4),
+   (2,5),
+   (2,6),
+   (2,7),
+   (3,3),
+   (3,4),
+   (3,5),
+   (3,6),
+   (3,7),
+   (4,1),
+   (4,2),
+   (4,3),
+   (4,4),
+   (4,5),
+   (5,1),
+   (5,2),
+   (5,3),
+   (5,4),
+   (6,1),
+   (7,2),
+   (7,3),
+   (5,1),
+   (8,2),
+   (8,3)
+ ;
