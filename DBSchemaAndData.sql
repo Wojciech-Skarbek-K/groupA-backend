@@ -62,7 +62,7 @@ values
 ('Platforms'),
 ('Data'),
 ('Artificial Intelligence'),
-('Cyber Seurity'), 
+('Cyber Security'), 
 ('Workday'),
 ('Experience Design'),
 ('Product'),
