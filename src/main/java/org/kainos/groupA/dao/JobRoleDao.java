@@ -25,7 +25,6 @@ public class JobRoleDao {
                     rs.getString("sharepoint_url"),
                     rs.getInt("cap_id")
             );
-
             jobs.add(job);
         }
         return jobs;
