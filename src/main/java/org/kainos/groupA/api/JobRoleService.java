@@ -2,7 +2,8 @@ package org.kainos.groupA.api;
 
 import io.swagger.annotations.Api;
 import org.kainos.groupA.api.models.JobRole;
-import org.kainos.groupA.db.DB;
+import org.kainos.groupA.dao.JobRoleDao;
+import org.kainos.groupA.utils.DatabaseConnector;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,14 +14,22 @@ import java.util.List;
 
 @Path("/api")
 @Api("User API")
-public class JobService {
+public class JobRoleService {
+
+    private DatabaseConnector databaseConnector;
+    public JobRoleDao jobRoleDao;
+
+    public JobRoleService(DatabaseConnector databaseConnector, JobRoleDao jobRoleDao) {
+        this.databaseConnector = databaseConnector;
+        this.jobRoleDao = jobRoleDao;
+    }
 
     @GET
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<JobRole> getJobRoles()throws SQLException {
+    public List<JobRole> getJobRoles() throws SQLException {
         try {
-            return DB.getJobRoles();
+            return jobRoleDao.getJobRoles(databaseConnector.getConnection());
         } catch (SQLException e) {
             System.out.println("SQL Exception: There are no job roles to be displayed." + e.getMessage());
             return null;

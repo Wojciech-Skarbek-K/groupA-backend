@@ -1,17 +1,13 @@
-package org.kainos.groupA.db;
-
-import org.kainos.groupA.api.models.JobRole;
+package org.kainos.groupA.utils;
 
 import java.io.FileInputStream;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
-public class DB {
+public class DatabaseConnector {
     private static Connection conn;
 
-    protected static Connection getConnection() {
+    public Connection getConnection() {
         String user;
         String password;
         String host;
@@ -46,27 +42,5 @@ public class DB {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static List<JobRole> getJobRoles() throws SQLException {
-        Connection c = getConnection();
-        Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery(
-                "SELECT * " + "FROM Job_Roles;");
-
-        List<JobRole> jobs = new ArrayList<>();
-
-        while (rs.next()) {
-            JobRole job = new JobRole(
-                    rs.getString("role_name"),
-                    rs.getString("role_description"),
-                    rs.getString("sharepoint_url"),
-                    rs.getInt("cap_id")
-            );
-
-            jobs.add(job);
-        }
-        System.out.println(jobs);
-        return jobs;
     }
 }
