@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
-    private enum Role {EMPLOYEE, ADMIN};
-    private enum Location {BELEFAST, GDANSK, }
+    private enum Role {EMPLOYEE, ADMIN}
+    private enum Location {BELEFAST, GDANSK}
     private String email;
     private String password;
     private Role role;
@@ -25,5 +25,5 @@ public class User {
             @JsonProperty("last_name") String last_name,
             @JsonProperty("phone_number") String phone_number,
             @JsonProperty("location") Location location
-    ) {};
+    ) {}
 }

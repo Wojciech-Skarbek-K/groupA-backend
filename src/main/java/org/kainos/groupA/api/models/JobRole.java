@@ -48,17 +48,4 @@ public class JobRole {
     public void setCap_id(int cap_id) {
         this.cap_id = cap_id;
     }
-
-//    @JsonCreator
-//    public JobRole(
-//            @JsonProperty("name") String role_name,
-//            @JsonProperty("description") String role_description,
-//            @JsonProperty("URL") String sharepoint_url,
-//            @JsonProperty("cap_id") int cap_id
-//    )
-//    {
-//        this.setRole_name(role_name);
-//        this.setRole_description(role_description);
-//        this.setSharepoint_url(sharepoint_url);
-//        this.setCap_id(cap_id);};
 }

@@ -31,7 +31,6 @@ public class JobRoleService {
         try {
             return jobRoleDao.getJobRoles(databaseConnector.getConnection());
         } catch (SQLException e) {
-            System.out.println("SQL Exception: There are no job roles to be displayed." + e.getMessage());
             return null;
         }
     }
