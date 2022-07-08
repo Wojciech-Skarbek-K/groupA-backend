@@ -24,10 +24,11 @@ public class DatabaseConnector {
             Properties props = new Properties();
             props.load(propsStream);
 
-            user            = props.getProperty("user");
-            password        = props.getProperty("password");
-            host            = props.getProperty("host");
-            db              = props.getProperty("db");
+            user            = System.getenv("DB_USERNAME");
+            password        = System.getenv("DB_PASSWORD");
+            host            = System.getenv("DB_HOST");
+            db              = System.getenv("DB_NAME");
+
 
             if (user == null || password == null || host == null)
                 throw new IllegalArgumentException(
