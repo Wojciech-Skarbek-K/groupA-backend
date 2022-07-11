@@ -18,10 +18,10 @@ public class DatabaseConnector {
         }
 
         try {
-            user            = System.getenv("DB_USERNAME");
-            password        = System.getenv("DB_PASSWORD");
-            host            = System.getenv("DB_HOST");
-            db              = System.getenv("DB_NAME");
+            user = System.getenv("DB_USERNAME");
+            password = System.getenv("DB_PASSWORD");
+            host = System.getenv("DB_HOST");
+            db = System.getenv("DB_NAME");
 
 
             if (user == null || password == null || host == null)
@@ -30,7 +30,7 @@ public class DatabaseConnector {
                                 + "user, password, an host properties.");
 
             conn = DriverManager.getConnection("jdbc:mysql://"
-                    + host + "/" + db +  "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
+                    + host + "/" + db + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
             return conn;
 
         } catch (Exception e) {

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.kainos.groupA.GroupAApplication;
 import org.kainos.groupA.GroupAConfiguration;
-import org.kainos.groupA.api.models.JobRole;
+import org.kainos.groupA.models.JobRole;
 
 import java.util.List;
 

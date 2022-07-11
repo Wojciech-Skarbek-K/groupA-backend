@@ -1,8 +1,8 @@
-package org.kainos.groupA.api;
+package org.kainos.groupA.services;
 
 import io.swagger.annotations.Api;
-import org.kainos.groupA.api.models.JobRole;
 import org.kainos.groupA.dao.JobRoleDao;
+import org.kainos.groupA.models.JobRole;
 import org.kainos.groupA.utils.DatabaseConnector;
 
 import javax.ws.rs.GET;
@@ -24,14 +24,7 @@ public class JobRoleService {
         this.jobRoleDao = jobRoleDao;
     }
 
-    @GET
-    @Path("/job-roles")
-    @Produces(MediaType.APPLICATION_JSON)
     public List<JobRole> getJobRoles() throws SQLException {
-        try {
-            return jobRoleDao.getJobRoles(databaseConnector.getConnection());
-        } catch (SQLException e) {
-            return null;
-        }
+        return jobRoleDao.getJobRoles(databaseConnector.getConnection());
     }
 }

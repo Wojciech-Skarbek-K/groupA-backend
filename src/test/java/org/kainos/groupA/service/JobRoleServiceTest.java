@@ -2,8 +2,8 @@ package org.kainos.groupA.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.kainos.groupA.api.JobRoleService;
-import org.kainos.groupA.api.models.JobRole;
+import org.kainos.groupA.controller.JobRoleController;
+import org.kainos.groupA.models.JobRole;
 import org.kainos.groupA.dao.JobRoleDao;
 import org.kainos.groupA.utils.DatabaseConnector;
 import org.mockito.Mockito;
@@ -23,7 +23,7 @@ public class JobRoleServiceTest {
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
     Connection conn;
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
-    JobRoleService jobService = Mockito.mock(JobRoleService.class);
+    JobRoleController jobService = Mockito.mock(JobRoleController.class);
 
     @Test
     void getJobRoles_shouldReturnJobRolesList_whenReturnsJobRolesList() throws SQLException {
@@ -38,6 +38,6 @@ public class JobRoleServiceTest {
     void getJobRoles_shouldThrowSqlException_whenThrowsSqlException() throws SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRoleDao.getJobRoles(conn)).thenThrow(SQLException.class);
-        assertThrows(SQLException.class, () -> jobRoleDao.getJobRoles(conn));
+        assertThrows(SQLException.class, () -> jobService.getJobRoles());
     }
 }

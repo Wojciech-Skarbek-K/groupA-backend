@@ -4,14 +4,12 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.kainos.groupA.api.JobRoleService;
+import org.kainos.groupA.controller.JobRoleController;
 import org.kainos.groupA.api.UserService;
 import org.kainos.groupA.dao.JobRoleDao;
 import org.kainos.groupA.utils.DatabaseConnector;
 
 public class GroupAApplication extends io.dropwizard.Application<GroupAConfiguration> {
-
-    DatabaseConnector databaseConnector = new DatabaseConnector();
 
     public static void main(final String[] args) throws Exception {
         new GroupAApplication().run(args);
@@ -36,6 +34,6 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
     public void run(final GroupAConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new UserService());
-        environment.jersey().register(new JobRoleService(databaseConnector, new JobRoleDao()));
+        environment.jersey().register(new JobRoleController());
     }
 }

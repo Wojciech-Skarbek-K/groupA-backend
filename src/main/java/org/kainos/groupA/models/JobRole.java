@@ -1,8 +1,7 @@
-package org.kainos.groupA.api.models;
+package org.kainos.groupA.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.kainos.groupA.api.models.User;
 
 public class JobRole {
     private String role_name;
@@ -10,7 +9,13 @@ public class JobRole {
     private String sharepoint_url;
     private int cap_id;
 
-    public JobRole(String role_name, String role_description, String sharepoint_url, int cap_id) {
+    @JsonCreator
+    public JobRole(
+            @JsonProperty("role_name") String role_name,
+            @JsonProperty("role_description") String role_description,
+            @JsonProperty("sharepoint_url") String sharepoint_url,
+            @JsonProperty("cap_id") int cap_id
+    ) {
         this.role_name = role_name;
         this.role_description = role_description;
         this.sharepoint_url = sharepoint_url;
