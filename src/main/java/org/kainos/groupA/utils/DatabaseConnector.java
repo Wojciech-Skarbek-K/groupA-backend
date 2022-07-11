@@ -7,13 +7,13 @@ import java.util.Properties;
 public class DatabaseConnector {
     private static Connection conn;
 
-    public Connection getConnection() {
+    public Connection getConnection() throws SQLException {
         String user;
         String password;
         String host;
         String db;
 
-        if (conn != null) {
+        if (conn != null && !conn.isClosed()) {
             return conn;
         }
 
