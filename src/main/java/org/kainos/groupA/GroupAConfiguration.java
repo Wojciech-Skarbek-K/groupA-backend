@@ -13,7 +13,7 @@ public class GroupAConfiguration extends io.dropwizard.Configuration {
 
     @JsonProperty("swagger")
     public SwaggerBundleConfiguration getSwagger() {
-        swagger.setResourcePackage("org.kainos.groupA.api");
+        swagger.setResourcePackage("org.kainos.groupA.controller");
         String[] schemes = {"http", "https"};
         swagger.setSchemes(schemes);
         return swagger;

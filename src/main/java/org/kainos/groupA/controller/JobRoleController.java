@@ -7,16 +7,13 @@ import org.kainos.groupA.dao.JobRoleDao;
 import org.kainos.groupA.utils.DatabaseConnector;
 import org.kainos.groupA.services.JobRoleService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
-import java.util.List;
 
 @Path("/api")
-@Api("User API")
+@Api("Job Role API")
 public class JobRoleController {
 
     private static JobRoleService jobRoleService;
@@ -33,8 +30,8 @@ public class JobRoleController {
         try {
             return Response.ok(jobRoleService.getJobRoles()).build();
         } catch ( SQLException e) {
-            System.out.println(e + " is thrown in controller.");
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
+
 }
