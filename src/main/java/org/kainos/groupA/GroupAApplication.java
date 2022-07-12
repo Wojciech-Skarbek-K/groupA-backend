@@ -7,6 +7,9 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.groupA.controller.JobRoleController;
 import org.kainos.groupA.controller.UserController;
 
+/**
+ * Main class of the application.
+ */
 public class GroupAApplication extends io.dropwizard.Application<GroupAConfiguration> {
 
     public static void main(final String[] args) throws Exception {
@@ -28,6 +31,9 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
         });
     }
 
+    /**
+     * Registers application controllers.
+     */
     @Override
     public void run(final GroupAConfiguration configuration,
                     final Environment environment) {

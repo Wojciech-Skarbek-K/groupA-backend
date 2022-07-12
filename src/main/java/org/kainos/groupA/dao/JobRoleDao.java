@@ -10,6 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRoleDao {
+    /**
+     * Sends query to database using Connection c. On successful transaction creates a list of JobRoles. After the
+     * list is created, connection is closed and the list is returned.
+     *
+     * @param c connection which will be used to send query.
+     * @return List of JobRoles
+     * @throws SQLException
+     */
     public List<JobRole> getJobRoles(Connection c) throws SQLException {
         List<JobRole> jobs = new ArrayList<>();
         try {
