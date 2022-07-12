@@ -6,6 +6,7 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.kainos.groupA.controller.JobRoleController;
 import org.kainos.groupA.controller.UserController;
+import org.kainos.groupA.controller.BandCompController;
 
 public class GroupAApplication extends io.dropwizard.Application<GroupAConfiguration> {
 
@@ -33,5 +34,6 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
                     final Environment environment) {
         environment.jersey().register(new UserController());
         environment.jersey().register(new JobRoleController());
+        environment.jersey().register(new BandCompController());
     }
 }
