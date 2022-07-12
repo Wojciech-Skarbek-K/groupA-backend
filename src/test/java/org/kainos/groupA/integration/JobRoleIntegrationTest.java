@@ -27,5 +27,6 @@ public class JobRoleIntegrationTest {
                .get(new GenericType<List<JobRole>>(){});
        Assertions.assertTrue(response.size() > 0);
        Assertions.assertTrue(response.get(0).getRole_name() != null);
+       Assertions.assertTrue(response.get(0).getCap_name() != null);
     }
 }
