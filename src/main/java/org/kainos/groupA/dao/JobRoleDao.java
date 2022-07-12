@@ -23,13 +23,15 @@ public class JobRoleDao {
         try {
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
-                    "SELECT * " + "FROM Job_Roles;");
+                    "SELECT * " + "FROM Job_Roles " + "JOIN Band " + "ON (Job_Roles.band_id = Band.band_id);");
             while (rs.next()) {
                 JobRole job = new JobRole(
                         rs.getString("role_name"),
                         rs.getString("role_description"),
                         rs.getString("sharepoint_url"),
-                        rs.getInt("cap_id")
+                        rs.getInt("cap_id"),
+                        rs.getInt("band_id"),
+                        rs.getString("band_name")
                 );
                 jobs.add(job);
             }
