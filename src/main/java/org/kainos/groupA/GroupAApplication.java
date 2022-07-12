@@ -4,7 +4,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.kainos.groupA.api.UserService;
+import org.kainos.groupA.controller.JobRoleController;
+import org.kainos.groupA.controller.UserController;
 
 public class GroupAApplication extends io.dropwizard.Application<GroupAConfiguration> {
 
@@ -30,7 +31,7 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
     @Override
     public void run(final GroupAConfiguration configuration,
                     final Environment environment) {
-        environment.jersey().register(new UserService());
+        environment.jersey().register(new UserController());
+        environment.jersey().register(new JobRoleController());
     }
-
 }

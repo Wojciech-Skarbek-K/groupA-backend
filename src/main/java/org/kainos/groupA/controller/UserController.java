@@ -1,7 +1,7 @@
-package org.kainos.groupA.api;
+package org.kainos.groupA.controller;
 
 import io.swagger.annotations.Api;
-import org.kainos.groupA.api.models.User;
+import org.kainos.groupA.models.User;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @Path("/api")
 @Api("User API")
-public class UserService {
+public class UserController {
     //Endpoints
     @GET
     @Path("/users")

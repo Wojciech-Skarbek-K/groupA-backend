@@ -1,34 +1,28 @@
-package org.kainos.groupA.db;
+package org.kainos.groupA.utils;
 
 import java.io.FileInputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.Properties;
 
-public class DB {
+public class DatabaseConnector {
     private static Connection conn;
 
-    protected static Connection getConnection() {
+    public Connection getConnection() throws SQLException {
         String user;
         String password;
         String host;
         String db;
 
-        if (conn != null) {
+        if (conn != null && !conn.isClosed()) {
             return conn;
         }
 
         try {
-            FileInputStream propsStream =
-                    new FileInputStream("db.properties");
+            user = System.getenv("DB_USERNAME");
+            password = System.getenv("DB_PASSWORD");
+            host = System.getenv("DB_HOST");
+            db = System.getenv("DB_NAME");
 
-            Properties props = new Properties();
-            props.load(propsStream);
-
-            user            = props.getProperty("user");
-            password        = props.getProperty("password");
-            host            = props.getProperty("host");
-            db              = props.getProperty("db");
 
             if (user == null || password == null || host == null)
                 throw new IllegalArgumentException(
