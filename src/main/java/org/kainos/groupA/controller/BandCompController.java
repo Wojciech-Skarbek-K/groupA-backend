@@ -25,7 +25,7 @@ public class BandCompController {
     @GET
     @Path("/band-comp/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJobRoles(@PathParam("bandID") int bandID) throws SQLException {
+    public Response getJobRoles(@PathParam("id") int bandID) throws SQLException {
         try {
             return Response.ok(bandCompService.getCompByBandID(bandID)).build();
         } catch ( SQLException e) {

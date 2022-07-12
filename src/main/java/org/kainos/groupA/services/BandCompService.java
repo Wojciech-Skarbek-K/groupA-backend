@@ -20,8 +20,8 @@ public class BandCompService {
         this.bandCompDao = bandCompDao;
     }
 
-    public List<Competency> getCompByBandID(int id) throws SQLException {
-        return bandCompDao.getCompByBandID(databaseConnector.getConnection(), id);
+    public List<Competency> getCompByBandID(int bandID) throws SQLException {
+        return bandCompDao.getCompByBandID(databaseConnector.getConnection(), bandID);
     }
 
 }

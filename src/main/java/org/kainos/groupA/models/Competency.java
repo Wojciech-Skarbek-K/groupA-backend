@@ -4,21 +4,31 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Competency {
-    private String role_name;
-    private String role_description;
-    private String sharepoint_url;
-    private int cap_id;
+    public String getComp_name() {
+        return comp_name;
+    }
+
+    public void setComp_name(String comp_name) {
+        this.comp_name = comp_name;
+    }
+
+    public String getComp_description() {
+        return comp_description;
+    }
+
+    public void setComp_description(String comp_description) {
+        this.comp_description = comp_description;
+    }
+
+    private String comp_name;
+    private String comp_description;
 
     @JsonCreator
     public Competency(
-            @JsonProperty("role_name") String role_name,
-            @JsonProperty("role_description") String role_description,
-            @JsonProperty("sharepoint_url") String sharepoint_url,
-            @JsonProperty("cap_id") int cap_id
+            @JsonProperty("comp_name") String comp_name,
+            @JsonProperty("comp_description") String comp_description
     ) {
-        this.role_name = role_name;
-        this.role_description = role_description;
-        this.sharepoint_url = sharepoint_url;
-        this.cap_id = cap_id;
+        this.comp_name = comp_name;
+        this.comp_description = comp_description;
     }
 }
