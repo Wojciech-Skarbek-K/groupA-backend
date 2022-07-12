@@ -14,14 +14,11 @@ public class BandCompDao {
     public List<Competency> getCompByBandID(Connection c, int bandID) throws SQLException {
         List<Competency> comps = new ArrayList<>();
         try {
-            System.out.println("before query");
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
-                    "SELECT Competency.comp_name, Competency.comp_description"
-                            + "FROM Band_Comp inner join Competency on Band_Comp.comp_id = Competency.comp_id"
+                    "SELECT Competency.comp_name, Competency.comp_description "
+                            + "FROM Band_Comp inner join Competency on Band_Comp.comp_id = Competency.comp_id "
                             + "WHERE Band_Comp.band_id = " + bandID + ";");
-            System.out.println("after query");
-            System.out.println(rs);
 
             while (rs.next()) {
                 Competency competency = new Competency(
