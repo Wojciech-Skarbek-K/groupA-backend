@@ -22,7 +22,7 @@ public class BandCompDao {
             while (rs.next()) {
                 idCount = rs.getInt("count(*)");
             }
-            if(bandID >= idCount || bandID <= 0) {
+            if(bandID > idCount || bandID <= 0) {
                 throw new BandIDDoesNotExistException();
             }
             //Query that selects the competency by bandID
