@@ -3,6 +3,7 @@ package org.kainos.groupA.controller;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.groupA.dao.BandCompDao;
+import org.kainos.groupA.exception.BandIDDoesNotExistException;
 import org.kainos.groupA.utils.DatabaseConnector;
 import org.kainos.groupA.services.BandCompService;
 
@@ -25,11 +26,13 @@ public class BandCompController {
     @GET
     @Path("/band-comp/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJobRoles(@PathParam("id") int bandID) throws SQLException {
+    public Response getCompByBandID(@PathParam("id") int bandID) {
         try {
             return Response.ok(bandCompService.getCompByBandID(bandID)).build();
         } catch ( SQLException e) {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        } catch (BandIDDoesNotExistException e) {
+            return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }
     }
 
