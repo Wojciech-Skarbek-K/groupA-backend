@@ -1,5 +1,7 @@
 package org.kainos.groupA.utils;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.io.FileInputStream;
 import java.sql.*;
 import java.util.Properties;
@@ -7,6 +9,14 @@ import java.util.Properties;
 public class DatabaseConnector {
     private static Connection conn;
 
+    /**
+     * On successful database connection returns object representing this connection,
+     * so it can be later used in queries to the database. If the connection cannot be established,
+     * returns null instead. Throws SQLException on errors.
+     *
+     * @return Connection
+     * @throws SQLException
+     */
     public Connection getConnection() throws SQLException {
         String user;
         String password;
