@@ -28,5 +28,7 @@ public class JobRoleIntegrationTest {
        Assertions.assertTrue(response.size() > 0);
        Assertions.assertTrue(response.get(0).getRole_name() != null);
        Assertions.assertTrue(response.get(0).getCap_name() != null);
+       Assertions.assertNotNull(response.get(0).getBand_name());
+       Assertions.assertNotNull(response.get(0).getBand_id());
     }
 }

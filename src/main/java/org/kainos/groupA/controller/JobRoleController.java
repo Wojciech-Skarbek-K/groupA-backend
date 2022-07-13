@@ -23,6 +23,13 @@ public class JobRoleController {
         jobRoleService = new JobRoleService(databaseConnector, new JobRoleDao());
     }
 
+    /**
+     * On successful retrieval of list of JobRoles, builds a response and returns it. If
+     * the list couldn't be retrieved returns response with code 500 (Internal Server Error)
+     *
+     * @return response
+     * @throws SQLException
+     */
     @GET
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
