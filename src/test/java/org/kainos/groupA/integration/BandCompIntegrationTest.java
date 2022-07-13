@@ -28,7 +28,12 @@ public class BandCompIntegrationTest {
         Response response = APP.client().target("http://localhost:8080/api/band-comp/2")
                 .request()
                 .get(Response.class);
+        System.out.println(response.getEntity());
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK_200);
+        List<Competency> comp =response.readEntity(new GenericType<List<Competency>>(){});
+        Assertions.assertTrue(comp.size() > 0);
+        Assertions.assertNotNull(comp.get(0).getComp_name());
+        Assertions.assertNotNull(comp.get(0).getComp_description());
     }
 
     @Test
@@ -39,13 +44,4 @@ public class BandCompIntegrationTest {
         Assertions.assertEquals(response.getStatus(), HttpStatus.NOT_FOUND_404);
     }
 
-    @Test
-    void getCompByBandID_shouldReturnListOfCompetenciesForBand() {
-        List<Competency> response = APP.client().target("http://localhost:8080/api/band-comp/1")
-                .request()
-                .get(new GenericType<List<Competency>>(){});
-        Assertions.assertTrue(response.size() > 0);
-        Assertions.assertNotNull(response.get(0).getComp_name());
-        Assertions.assertNotNull(response.get(0).getComp_description());
-    }
 }

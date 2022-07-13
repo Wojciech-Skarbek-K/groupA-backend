@@ -51,11 +51,4 @@ public class BandCompServiceTest {
         assertThrows(BandIDDoesNotExistException.class, () -> bandCompService.getCompByBandID(id));
     }
 
-    @Test
-    void getCompByBandID_shouldThrowBandIDDoesNotExist_whenIDisLessThan1() throws SQLException, BandIDDoesNotExistException {
-        int id = -1;
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(bandCompDao.getCompByBandID(conn,id)).thenThrow(BandIDDoesNotExistException.class);
-        assertThrows(BandIDDoesNotExistException.class, () -> bandCompService.getCompByBandID(id));
-    }
 }
