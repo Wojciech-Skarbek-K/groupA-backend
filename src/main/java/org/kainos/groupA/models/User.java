@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
-    private enum Role {EMPLOYEE, ADMIN}
-    private enum Location {BELFAST, GDANSK, BIRMINGHAM, LONDON}
+    public enum Role {Employee, Admin}
+    public enum Location {Belfast, Gdansk, Birmingham, London}
     private String email;
     private String password;
     private Role role;

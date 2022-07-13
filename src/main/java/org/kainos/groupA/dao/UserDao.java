@@ -2,10 +2,8 @@ package org.kainos.groupA.dao;
 
 import org.kainos.groupA.models.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.validation.constraints.Null;
+import java.sql.*;
 
 public class UserDao {
     /**
@@ -19,16 +17,33 @@ public class UserDao {
      * @throws SQLException
      */
     public int createUser(User user, Connection c) throws SQLException {
+        int userId = 0;
         try {
-            Statement st = c.createStatement();
-            //check if email exists and is correct email
-            //check if password is correct
-            //insert into database using prepared statement
+            String createUserQuery = "INSERT INTO User (email, password, role, token, first_name, last_name," +
+                    "phone_number, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement preparedSt = c.prepareStatement(createUserQuery, Statement.RETURN_GENERATED_KEYS);
+            preparedSt.setString(1, user.getEmail());
+            preparedSt.setString(2, user.getPassword());
+            preparedSt.setString(3, user.getRole().name());
+            preparedSt.setString(4, user.getToken());
+            preparedSt.setString(5, user.getFirst_name());
+            preparedSt.setString(6, user.getLast_name());
+            preparedSt.setString(7, user.getPhone_number());
+            preparedSt.setString(8, user.getLocation().name());
+            int affectedRows = preparedSt.executeUpdate();
+            System.out.println("AFFECTED ROWS: " + affectedRows);
+
+
+            try (ResultSet rs = preparedSt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    userId = rs.getInt(1);
+                }
+            }
         } catch (SQLException e) {
             throw e;
         } finally {
             c.close();
+            return userId;
         }
-        return 0;
     }
 }
