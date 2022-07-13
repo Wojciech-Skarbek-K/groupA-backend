@@ -12,6 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Path("/api")
@@ -36,8 +37,8 @@ public class UserController {
         if(userValidator.isValidUser(user)) {
             try {
                 return Response.ok(userService.createUser(user)).build();
-            } catch ( SQLException | NullPointerException e) {
-                System.out.println(e);
+            } catch (SQLException | NullPointerException e) {
+                System.out.println("SIEMA " + e);
                 return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
             }
         } else {

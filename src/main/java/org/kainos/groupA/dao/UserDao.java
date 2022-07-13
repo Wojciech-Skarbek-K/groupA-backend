@@ -17,7 +17,7 @@ public class UserDao {
      * @throws SQLException
      */
     public int createUser(User user, Connection c) throws SQLException {
-        int userId = 0;
+        int userId = -1;
         try {
             String createUserQuery = "INSERT INTO User (email, password, role, token, first_name, last_name," +
                     "phone_number, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
@@ -31,7 +31,6 @@ public class UserDao {
             preparedSt.setString(7, user.getPhone_number());
             preparedSt.setString(8, user.getLocation().name());
             int affectedRows = preparedSt.executeUpdate();
-            System.out.println("AFFECTED ROWS: " + affectedRows);
 
             try (ResultSet rs = preparedSt.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -42,7 +41,7 @@ public class UserDao {
             throw e;
         } finally {
             c.close();
-            return userId;
         }
+        return userId;
     }
 }
