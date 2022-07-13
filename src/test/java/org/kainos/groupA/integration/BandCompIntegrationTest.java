@@ -10,7 +10,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.groupA.GroupAApplication;
 import org.kainos.groupA.GroupAConfiguration;
 import org.kainos.groupA.models.Competency;
+import org.kainos.groupA.models.JobRole;
 
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -35,5 +37,15 @@ public class BandCompIntegrationTest {
                 .request()
                 .get(Response.class);
         Assertions.assertEquals(response.getStatus(), HttpStatus.NOT_FOUND_404);
+    }
+
+    @Test
+    void getCompByBandID_shouldReturnListOfCompetenciesForBand() {
+        List<Competency> response = APP.client().target("http://localhost:8080/api/band-comp/1")
+                .request()
+                .get(new GenericType<List<Competency>>(){});
+        Assertions.assertTrue(response.size() > 0);
+        Assertions.assertNotNull(response.get(0).getComp_name());
+        Assertions.assertNotNull(response.get(0).getComp_description());
     }
 }
