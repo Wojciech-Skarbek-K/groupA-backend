@@ -8,16 +8,18 @@ import java.sql.*;
 public class UserDao {
     /**
      * Checks if the email address already exists in database and validates the received user using validator. If no
-     * issues occur, adds (registers) the user into the database using prepared statement. Throws SQLException on
-     * database errors and UserValidationException on not valid user.
+     * issues occur, adds (registers) the user into the database using prepared statement. Returns id of created
+     * user in the database. Throws SQLException on database errors and UserValidationException on not valid user.
      *
      * @param user
      * @param c
-     * @return response
+     * @return id of created user
      * @throws SQLException
      */
     public int createUser(User user, Connection c) throws SQLException {
         int userId = 0;
+        //You probably don't need to check if the email already exists in the database, since database will check it
+        //itself, otherwise you would need two requests. I'm unsure if it's ok to do it like that though.
         try {
             String createUserQuery = "INSERT INTO User (email, password, role, token, first_name, last_name," +
                     "phone_number, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
@@ -32,7 +34,6 @@ public class UserDao {
             preparedSt.setString(8, user.getLocation().name());
             int affectedRows = preparedSt.executeUpdate();
             System.out.println("AFFECTED ROWS: " + affectedRows);
-
 
             try (ResultSet rs = preparedSt.getGeneratedKeys()) {
                 if (rs.next()) {
