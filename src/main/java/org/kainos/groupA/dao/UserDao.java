@@ -18,8 +18,6 @@ public class UserDao {
      */
     public int createUser(User user, Connection c) throws SQLException {
         int userId = 0;
-        //You probably don't need to check if the email already exists in the database, since database will check it
-        //itself, otherwise you would need two requests. I'm unsure if it's ok to do it like that though.
         try {
             String createUserQuery = "INSERT INTO User (email, password, role, token, first_name, last_name," +
                     "phone_number, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
