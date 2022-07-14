@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @POST
-    @Path("/users")
+    @Path("/user/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user) throws FirstNameLengthException, LastNameLengthException, PhoneNumberLengthException, PasswordLengthException, PasswordContainsException, EmailContainsException, EmailLengthException, NotValidRoleException, NotValidLocationException {
@@ -39,7 +39,6 @@ public class UserController {
             try {
                 return Response.ok(userService.createUser(user)).build();
             } catch (SQLException | NullPointerException e) {
-                System.out.println("SIEMA " + e);
                 return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
             }
         } else {
