@@ -8,8 +8,10 @@ public class JobRole {
     private String role_description;
     private String sharepoint_url;
     private int cap_id;
+    private String cap_name;
     private int band_id;
     private String band_name;
+
 
     @JsonCreator
     public JobRole(
@@ -17,6 +19,7 @@ public class JobRole {
             @JsonProperty("role_description") String role_description,
             @JsonProperty("sharepoint_url") String sharepoint_url,
             @JsonProperty("cap_id") int cap_id,
+            @JsonProperty("cap_name") String cap_name,
             @JsonProperty("band_id") int band_id,
             @JsonProperty("band_name") String band_name
     ) {
@@ -24,6 +27,7 @@ public class JobRole {
         this.role_description = role_description;
         this.sharepoint_url = sharepoint_url;
         this.cap_id = cap_id;
+        this.cap_name = cap_name;
         this.band_id = band_id;
         this.band_name = band_name;
     }
@@ -58,6 +62,14 @@ public class JobRole {
 
     public void setCap_id(int cap_id) {
         this.cap_id = cap_id;
+    }
+
+    public String getCap_name() {
+        return cap_name;
+    }
+
+    public void setCap_name(String cap_name) {
+        this.cap_name = cap_name;
     }
 
     public int getBand_id(){return band_id;}
