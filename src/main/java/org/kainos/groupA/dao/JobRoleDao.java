@@ -23,7 +23,9 @@ public class JobRoleDao {
         try {
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
+
                     "SELECT * FROM Job_Roles JOIN Band ON (Job_Roles.band_id = Band.band_id) JOIN Capability ON (Job_Roles.cap_id = Capability.cap_id);");
+
             while (rs.next()) {
                 JobRole job = new JobRole(
                         rs.getString("role_name"),

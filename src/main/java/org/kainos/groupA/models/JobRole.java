@@ -12,6 +12,7 @@ public class JobRole {
     private int band_id;
     private String band_name;
 
+
     @JsonCreator
     public JobRole(
             @JsonProperty("role_name") String role_name,
