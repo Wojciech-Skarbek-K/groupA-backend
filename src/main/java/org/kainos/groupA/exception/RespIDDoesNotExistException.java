@@ -1,2 +1,4 @@
-package org.kainos.groupA.dao;public class RespIDDoesNotExistException {
+package org.kainos.groupA.exception;
+
+public class RespIDDoesNotExistException extends Exception {
 }
