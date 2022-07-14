@@ -2,11 +2,8 @@ package org.kainos.groupA.controller;
 
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
-import org.kainos.groupA.dao.BandCompDao;
 import org.kainos.groupA.dao.JobResponsibilityDao;
-import org.kainos.groupA.exception.BandIDDoesNotExistException;
 import org.kainos.groupA.exception.RespIDDoesNotExistException;
-import org.kainos.groupA.services.BandCompService;
 import org.kainos.groupA.services.JobResponsibilityService;
 import org.kainos.groupA.utils.DatabaseConnector;
 
