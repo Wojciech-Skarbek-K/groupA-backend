@@ -35,10 +35,10 @@ public class UserIntegrationTest {
 
     @Test
     void createUser_shouldReturnCreatedUserId() {
-        int response = APP.client().target("http://localhost:8080/api/user/register")
+        Response response = APP.client().target("https://localhost:8080/api/user/register")
                 .request()
                 .post(Entity.entity(testUser, MediaType.APPLICATION_JSON))
-                .readEntity(Integer.class);
+                .readEntity(Response.class);
         Assertions.assertTrue(response > 0);
     }
 }
