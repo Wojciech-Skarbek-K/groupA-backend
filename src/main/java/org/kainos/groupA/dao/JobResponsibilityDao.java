@@ -17,9 +17,9 @@ public class JobResponsibilityDao {
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
                     "SELECT Job_Roles.role_name, Responsibility.resp_desc"
-                            + "FROM JobRoles_Responsibility inner join Responsibility on JobRoles_Responsibility.resp_id = Responsibility.resp_id "
+                            + " FROM JobRoles_Responsibility inner join Responsibility on JobRoles_Responsibility.resp_id = Responsibility.resp_id "
                             + "inner join Job_Roles on JobRoles_Responsibility.role_id = Job_Roles.role_id"
-                            + "WHERE JobRoles_Responsibility.role_id = " + roleID + ";");
+                            + " WHERE JobRoles_Responsibility.role_id = " + roleID + ";");
 
             if(!rs.next()){
                 throw new RespIDDoesNotExistException();
