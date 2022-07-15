@@ -28,6 +28,7 @@ public class JobRoleDao {
 
             while (rs.next()) {
                 JobRole job = new JobRole(
+                        rs.getInt("role_id"),
                         rs.getString("role_name"),
                         rs.getString("role_description"),
                         rs.getString("sharepoint_url"),
