@@ -28,7 +28,6 @@ public class BandCompIntegrationTest {
         Response response = APP.client().target("http://localhost:8080/api/band-comp/2")
                 .request()
                 .get(Response.class);
-        System.out.println(response.getEntity());
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK_200);
         List<Competency> comp =response.readEntity(new GenericType<List<Competency>>(){});
         Assertions.assertTrue(comp.size() > 0);
