@@ -26,7 +26,6 @@ public class UserServiceTest {
             "test@email.com",
             "encryptedpass",
             User.Role.Employee,
-            "token",
             "Joe",
             "Doe",
             "123456789",

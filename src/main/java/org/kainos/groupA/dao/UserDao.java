@@ -19,17 +19,16 @@ public class UserDao {
     public int createUser(User user, Connection c) throws SQLException {
         int userId = -1;
         try {
-            String createUserQuery = "INSERT INTO User (email, password, role, token, first_name, last_name," +
-                    "phone_number, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            String createUserQuery = "INSERT INTO User (email, password, role, first_name, last_name," +
+                    "phone_number, location) VALUES (?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedSt = c.prepareStatement(createUserQuery, Statement.RETURN_GENERATED_KEYS);
             preparedSt.setString(1, user.getEmail());
             preparedSt.setString(2, user.getPassword());
             preparedSt.setString(3, user.getRole().name());
-            preparedSt.setString(4, user.getToken());
-            preparedSt.setString(5, user.getFirst_name());
-            preparedSt.setString(6, user.getLast_name());
-            preparedSt.setString(7, user.getPhone_number());
-            preparedSt.setString(8, user.getLocation().name());
+            preparedSt.setString(4, user.getFirst_name());
+            preparedSt.setString(5, user.getLast_name());
+            preparedSt.setString(6, user.getPhone_number());
+            preparedSt.setString(7, user.getLocation().name());
             int affectedRows = preparedSt.executeUpdate();
 
             try (ResultSet rs = preparedSt.getGeneratedKeys()) {

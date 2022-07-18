@@ -24,9 +24,8 @@ import static org.hibernate.validator.internal.util.Contracts.assertTrue;
 public class UserIntegrationTest {
     User testUser =  new User(
             "test@kainos.com",
-            "encryptedpass",
+            "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
             User.Role.Employee,
-            "token",
             "Joe",
             "Doe",
             "123456789",
@@ -38,20 +37,25 @@ public class UserIntegrationTest {
     );
 
     private String generateEmail() {
-        byte[] array = new byte[7];
-        new Random().nextBytes(array);
-        String randomString = new String(array, Charset.forName("UTF-8"));
-        return randomString + "@kainos.com";
+        String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) {
+            int i = (int) (rnd.nextFloat() * CHARS.length());
+            salt.append(CHARS.charAt(i));
+        }
+        return salt.toString() + "@kainos.com";
     }
 
     @Test
-    void createUser_shouldReturnCreatedUserId()
-    {
+    void createUser_shouldReturnCreatedUserId() {
+        //TODO: when we will have remove user endpoint, replace the email generator with
+        //deleting the user after creating it
         testUser.setEmail(generateEmail());
         Response response = APP.client().target("http://localhost:8080/api/user/register")
                 .request()
                 .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
-        Assertions.assertEquals(response.getStatus(), HttpStatus.OK_200);
+        Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
         Assertions.assertTrue(response.readEntity(Integer.class) > 0);
     }
 }

@@ -9,7 +9,6 @@ public class User {
     private String email;
     private String password;
     private Role role;
-    private String token;
     private String first_name;
     private String last_name;
     private String phone_number;
@@ -20,7 +19,6 @@ public class User {
             @JsonProperty("email") String email,
             @JsonProperty("password") String password,
             @JsonProperty("role") Role role,
-            @JsonProperty("token") String token,
             @JsonProperty("first_name") String first_name,
             @JsonProperty("last_name") String last_name,
             @JsonProperty("phone_number") String phone_number,
@@ -29,7 +27,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
-        this.token = token;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_number = phone_number;
@@ -58,14 +55,6 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getFirst_name() {

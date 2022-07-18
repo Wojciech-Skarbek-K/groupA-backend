@@ -17,7 +17,6 @@ public class UserValidatorTest {
                 "orlagh@kainos.com",
                 "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlaghsdfghjkjhgfddfghjkfdhjkfdfghjkkgfdfghjertyuiodfghjklsdftyui",
                 "McCloskey",
                 "07345673456",
@@ -26,7 +25,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("First Name is too long");
     }
 
     @Test
@@ -35,7 +33,6 @@ public class UserValidatorTest {
                 "orlagh@kainos.com",
                 "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
                 "McCloskeysdfghjkjhgfddfghjkfdhjkfdfghjkkgfdfghjertyuiodfghjklsdftyui",
                 "07345673456",
@@ -44,7 +41,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("Last Name is too long");
     }
 
     @Test
@@ -53,7 +49,6 @@ public class UserValidatorTest {
                 "orlagh@kainos.com",
                 "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
                 "McCloskey",
                 "073456734564554554455156521",
@@ -62,7 +57,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("Phone Number is too long");
     }
 
 
@@ -72,7 +66,6 @@ public class UserValidatorTest {
                 "orlagh@kainos.com",
                 "Password!",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
                 "McCloskey",
                 "07345673451",
@@ -81,7 +74,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Password");
     }
 
     @Test
@@ -90,7 +82,6 @@ public class UserValidatorTest {
                 "orlagh@kainos.com",
                 "Password123",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
                 "McCloskey",
                 "07345673451",
@@ -99,7 +90,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Password");
     }
 
     @Test
@@ -108,7 +98,6 @@ public class UserValidatorTest {
                 "orlaghkainos.com",
                 "Password123!",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
                 "McCloskey",
                 "07345673451",
@@ -117,7 +106,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Email");
     }
 
     @Test
@@ -126,7 +114,6 @@ public class UserValidatorTest {
                 "orlagh@kainoss.co.uk",
                 "Password123!",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
                 "McCloskey",
                 "07345673451",
@@ -135,7 +122,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Email");
     }
 
     @Test
@@ -144,7 +130,6 @@ public class UserValidatorTest {
                 "orlaghsdfghjkdsdfghjkkjhsasdfghjkkjhgfdsdfghjk@kainos.com",
                 "Password123!",
                 Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
                 "McCloskey",
                 "07345673451",
@@ -153,7 +138,6 @@ public class UserValidatorTest {
         );
         assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Email");
     }
 
 }
