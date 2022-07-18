@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import org.kainos.groupA.dao.UserDao;
 import org.kainos.groupA.exception.*;
+import org.kainos.groupA.models.LoginUser;
 import org.kainos.groupA.models.User;
 import org.kainos.groupA.services.UserService;
 import org.kainos.groupA.utils.DatabaseConnector;
@@ -43,6 +44,18 @@ public class UserController {
             }
         } else {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
+        }
+    }
+
+    @POST
+    @Path("/user/login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response loginUser(LoginUser loginUser) throws InvalidUserException {
+        try {
+            return Response.ok(userService.loginUser(loginUser)).build();
+        } catch (SQLException e) {
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
         }
     }
 

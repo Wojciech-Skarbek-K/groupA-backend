@@ -1,5 +1,6 @@
 package org.kainos.groupA.dao;
 
+import org.kainos.groupA.models.LoginUser;
 import org.kainos.groupA.models.User;
 
 import javax.validation.constraints.Null;
@@ -42,5 +43,9 @@ public class UserDao {
             c.close();
         }
         return userId;
+    }
+
+    public int loginUser(LoginUser loginUser, Connection c) {
+        return 0;
     }
 }

@@ -1,6 +1,7 @@
 package org.kainos.groupA.services;
 
 import org.kainos.groupA.dao.UserDao;
+import org.kainos.groupA.models.LoginUser;
 import org.kainos.groupA.models.User;
 import org.kainos.groupA.utils.DatabaseConnector;
 
@@ -18,5 +19,9 @@ public class UserService {
 
     public int createUser(User user) throws SQLException {
         return userDao.createUser(user, databaseConnector.getConnection());
+    }
+
+    public int loginUser(LoginUser loginUser) throws SQLException {
+        return userDao.loginUser(loginUser, databaseConnector.getConnection());
     }
 }
