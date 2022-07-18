@@ -46,12 +46,12 @@ public class JobRespServiceTest {
         Mockito.when(jobResponsibilityDao.getJobResponsibilityByID(conn,id)).thenThrow(SQLException.class);
         assertThrows(SQLException.class, () -> jobResponsibilityService.getJobResponsibilityByID(id));
     }
-//look into this one
+
     @Test
     void getJobResponsibilityByID_shouldThrowRespIDDoesNotExist_whenIDisGreaterThanRespTableCount() throws SQLException, RespIDDoesNotExistException {
-        int id = 200;
+        int id = 232;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(jobResponsibilityDao.getJobResponsibilityByID(conn,id)).thenThrow(BandIDDoesNotExistException.class);
+        Mockito.when(jobResponsibilityDao.getJobResponsibilityByID(conn,id)).thenThrow(RespIDDoesNotExistException.class);
         assertThrows(RespIDDoesNotExistException.class, () -> jobResponsibilityService.getJobResponsibilityByID(id));
     }
 
