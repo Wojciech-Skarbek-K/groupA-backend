@@ -8,7 +8,7 @@ import org.kainos.groupA.models.User;
 public class UserValidator {
 
     public boolean isValidUser(User user) throws  InvalidUserException {
-        String encryption = "(.*[$2b$10$].*)";
+        String encryption = "([$2b$10$].*)"; //Matches a string that starts with '$2b$10$'
         String companyDomain = "kainos.com";
         String email = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +  //part before @
                 companyDomain + "$";
