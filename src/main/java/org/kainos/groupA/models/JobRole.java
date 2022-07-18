@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobRole {
+    private int role_id;
     private String role_name;
     private String role_description;
     private String sharepoint_url;
@@ -15,6 +16,7 @@ public class JobRole {
 
     @JsonCreator
     public JobRole(
+            @JsonProperty("role_id") int role_id,
             @JsonProperty("role_name") String role_name,
             @JsonProperty("role_description") String role_description,
             @JsonProperty("sharepoint_url") String sharepoint_url,
@@ -23,6 +25,7 @@ public class JobRole {
             @JsonProperty("band_id") int band_id,
             @JsonProperty("band_name") String band_name
     ) {
+        this.role_id = role_id;
         this.role_name = role_name;
         this.role_description = role_description;
         this.sharepoint_url = sharepoint_url;
@@ -32,6 +35,8 @@ public class JobRole {
         this.band_name = band_name;
     }
 
+    public int getRole_id(){return role_id;}
+    
     public String getRole_name() {
         return role_name;
     }
