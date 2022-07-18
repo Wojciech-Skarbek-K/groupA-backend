@@ -31,12 +31,12 @@ public class JobRespServiceTest {
     JobResponsibilityService jobResponsibilityService = new JobResponsibilityService(databaseConnector, jobResponsibilityDao);
 
     @Test
-    void getJobResponsibilityByID_shouldReturnListOfResponsibilities_whenReturnsResponsibilityList() throws SQLException, RespIDDoesNotExistException {
-        List<Responsibility> responsibilityList = new ArrayList<>();
+    void getJobResponsibilityByID_shouldReturnResponsibilities_whenReturnsResponsibility() throws SQLException, RespIDDoesNotExistException {
+        Responsibility responsibility = new Responsibility("", new ArrayList<>());
         int id = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(jobResponsibilityDao.getJobResponsibilityByID(conn, id)).thenReturn(responsibilityList);
-        assertEquals(responsibilityList, jobResponsibilityService.getJobResponsibilityByID(id));
+        Mockito.when(jobResponsibilityDao.getJobResponsibilityByID(conn, id)).thenReturn(responsibility);
+        assertEquals(responsibility, jobResponsibilityService.getJobResponsibilityByID(id));
     }
 
     @Test
