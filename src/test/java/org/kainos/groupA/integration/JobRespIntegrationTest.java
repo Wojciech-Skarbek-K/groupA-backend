@@ -27,12 +27,10 @@ public class JobRespIntegrationTest {
         Response response = APP.client().target("http://localhost:8080/api/job-responsibility/2")
                 .request()
                 .get(Response.class);
-        System.out.println(response.getEntity());
         Assertions.assertEquals(response.getStatus(), HttpStatus.OK_200);
-        List<Responsibility> resp =response.readEntity(new GenericType<List<Responsibility>>(){});
-        Assertions.assertTrue(resp.size() > 0);
-        Assertions.assertNotNull(resp.get(0).getResp_desc());
-        Assertions.assertNotNull(resp.get(0).getRole_name());
+        Responsibility resp =response.readEntity(new GenericType<Responsibility>(){});
+        Assertions.assertNotNull(resp.getResp_desc());
+        Assertions.assertNotNull(resp.getRole_name());
     }
 
     @Test
