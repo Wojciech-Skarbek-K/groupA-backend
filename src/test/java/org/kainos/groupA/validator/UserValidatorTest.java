@@ -6,17 +6,16 @@ import org.kainos.groupA.models.User;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.kainos.groupA.models.User.Role.Admin;
-import static org.kainos.groupA.models.User.Role.Employee;
+
 
 public class UserValidatorTest {
 
     UserValidator userValidator = new UserValidator();
-
     @Test
-    public void isValidUser_shouldThrowFirstNameLengthException_whenFirstNameTooLong() {
+    public void isValidUser_shouldInvalidUserException_whenFirstNameTooLong() {
         User user = new User(
                 "orlagh@kainos.com",
-                "Password123!",
+                "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
                 Admin,
                 "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlaghsdfghjkjhgfddfghjkfdhjkfdfghjkkgfdfghjertyuiodfghjklsdftyui",
@@ -25,16 +24,16 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(FirstNameLengthException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("First Name is too long");
     }
 
     @Test
-    public void isValidUser_shouldThrowLastNameLengthException_whenLastNameTooLong() {
+    public void isValidUser_shouldThrowInvalidUserException_whenLastNameTooLong() {
         User user = new User(
                 "orlagh@kainos.com",
-                "Password123!",
+                "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
                 Admin,
                 "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
@@ -43,16 +42,16 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(LastNameLengthException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("Last Name is too long");
     }
 
     @Test
-    public void isValidUser_shouldThrowPhoneNumberLengthException_whenPhoneNumberTooLong() {
+    public void isValidUser_shouldThrowInvalidUserException_whenPhoneNumberTooLong() {
         User user = new User(
                 "orlagh@kainos.com",
-                "Password123!",
+                "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
                 Admin,
                 "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
                 "Orlagh",
@@ -61,86 +60,14 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(PhoneNumberLengthException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("Phone Number is too long");
     }
 
-    @Test
-    public void isValidUser_shouldThrowPasswordLengthException_whenPasswordTooLong() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Password123!ertyufghghjhgghchdfsdfghjkl",
-                Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(PasswordLengthException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Password");
-    }
-
 
     @Test
-    public void isValidUser_shouldThrowPasswordLengthException_whenPasswordTooShort() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Pass",
-                Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(PasswordLengthException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Password");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowPasswordContainsException_whenPasswordDoesntContainUpperCase() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "password123!",
-                Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(PasswordContainsException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Password");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowPasswordContainsException_whenPasswordDoesntContainLowerCase() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "PASSWORD123!",
-                Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(PasswordContainsException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Password");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowPasswordContainsException_whenPasswordDoesntContainNumbers() {
+    public void isValidUser_shouldThrowInvalidUserException_whenPasswordIsntEncrypted() {
         User user = new User(
                 "orlagh@kainos.com",
                 "Password!",
@@ -152,13 +79,13 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(PasswordContainsException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("Invalid Password");
     }
 
     @Test
-    public void isValidUser_shouldThrowPasswordContainsException_whenPasswordDoesntContainSpecialCharacters() {
+    public void isValidUser_shouldThrowInvalidUserException_whenPasswordDoesntEqual61() {
         User user = new User(
                 "orlagh@kainos.com",
                 "Password123",
@@ -170,13 +97,13 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(PasswordContainsException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("Invalid Password");
     }
 
     @Test
-    public void isValidUser_shouldThrowEmailContainsException_whenEmailDoesntContainCorrectSyntax() {
+    public void isValidUser_shouldThrowInvalidUserException_whenEmailDoesntContainCorrectSyntax() {
         User user = new User(
                 "orlaghkainos.com",
                 "Password123!",
@@ -188,13 +115,13 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(EmailContainsException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("Invalid Email");
     }
 
     @Test
-    public void isValidUser_shouldThrowEmailContainsException_whenEmailDoesntContainCompanyDomain() {
+    public void isValidUser_shouldThrowInvalidUserException_whenEmailDoesntContainCompanyDomain() {
         User user = new User(
                 "orlagh@kainoss.co.uk",
                 "Password123!",
@@ -206,13 +133,13 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(EmailContainsException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("Invalid Email");
     }
 
     @Test
-    public void isValidUser_shouldThrowEmailLengthException_whenEmailTooLong() {
+    public void isValidUser_shouldThrowInvalidUserException_whenEmailTooLong() {
         User user = new User(
                 "orlaghsdfghjkdsdfghjkkjhsasdfghjkkjhgfdsdfghjk@kainos.com",
                 "Password123!",
@@ -224,115 +151,9 @@ public class UserValidatorTest {
                 User.Location.Belfast
 
         );
-        assertThrows(EmailLengthException.class,
+        assertThrows(InvalidUserException.class,
                 () -> userValidator.isValidUser(user));
         System.out.println("Invalid Email");
     }
 
-    /*@Test
-    public void isValidUser_shouldThrowNotValidRoleException_whenInvalidRole() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Password123!",
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(NotValidRoleException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Role");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowNotValidRoleException_whenNotAdmin() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Password123!",
-                Employee,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(NotValidRoleException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Role");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowNotValidLocationException_whenNotBelfast() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Password123!",
-                Employee,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(NotValidLocationException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Location");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowNotValidLocationException_whenNotGdansk() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Password123!",
-                Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(NotValidLocationException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Location");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowNotValidLocationException_whenNotBirmingham() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Password123!",
-                Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Belfast
-
-        );
-        assertThrows(NotValidLocationException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Location");
-    }
-
-    @Test
-    public void isValidUser_shouldThrowNotValidLocationException_whenNotLondon() {
-        User user = new User(
-                "orlagh@kainos.com",
-                "Password123!",
-                Admin,
-                "1234567898ytrdedfgyhjuiklkjhgfcdfghjkmnbvbnm",
-                "Orlagh",
-                "McCloskey",
-                "07345673451",
-                User.Location.Birmingham
-
-        );
-        assertThrows(NotValidLocationException.class,
-                () -> userValidator.isValidUser(user));
-        System.out.println("Invalid Location");
-    }*/
 }
