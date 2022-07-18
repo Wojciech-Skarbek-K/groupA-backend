@@ -18,7 +18,7 @@ public class JobResponsibilityService {
         this.jobResponsibilityDao = jobResponsibilityDao;
     }
 
-    public List<Responsibility> getJobResponsibilityByID(int roleID) throws SQLException, RespIDDoesNotExistException {
+    public Responsibility getJobResponsibilityByID(int roleID) throws SQLException, RespIDDoesNotExistException {
         return jobResponsibilityDao.getJobResponsibilityByID(databaseConnector.getConnection(), roleID);
     }
 }
