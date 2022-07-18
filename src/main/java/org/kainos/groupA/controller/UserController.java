@@ -35,15 +35,19 @@ public class UserController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user) throws InvalidUserException {
-        if(userValidator.isValidUser(user)) {
-            try {
-                return Response.ok(userService.createUser(user)).build();
-            } catch (SQLException | NullPointerException e) {
-                return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
-            }
-        } else {
+       try {
+           if (userValidator.isValidUser(user)) {
+               try {
+                   return Response.ok(userService.createUser(user)).build();
+               } catch (SQLException | NullPointerException e) {
+                   return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
+               }
+           } else {
+               return Response.status(HttpStatus.BAD_REQUEST_400).build();
+           }
+       } catch (InvalidUserException e) {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
-        }
+       }
     }
 
     @GET

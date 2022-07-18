@@ -36,6 +36,12 @@ public class UserIntegrationTest {
             new ResourceConfigurationSourceProvider()
     );
 
+    /**
+     * Generates Kainos e-mail address to fulfill validator e-mail requirements. Example e-mail address would be
+     * 'ABC123@kainos.com`. Returns the address as string.
+     *
+     * @return generated e-mail address.
+     */
     private String generateEmail() {
         String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
         StringBuilder salt = new StringBuilder();
@@ -57,5 +63,23 @@ public class UserIntegrationTest {
                 .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
         Assertions.assertTrue(response.readEntity(Integer.class) > 0);
+    }
+
+    @Test
+    void createUser_withoutWrongParam_shouldReturnStatusCode400() {
+        testUser.setEmail("notkainosemail");
+        Response response = APP.client().target("http://localhost:8080/api/user/register")
+                .request()
+                .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST_400, response.getStatus());
+    }
+
+    @Test
+    void createUser_withoutAParam_shouldReturnStatusCode500() {
+        testUser.setEmail(null);
+        Response response = APP.client().target("http://localhost:8080/api/user/register")
+                .request()
+                .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR_500, response.getStatus());
     }
 }
