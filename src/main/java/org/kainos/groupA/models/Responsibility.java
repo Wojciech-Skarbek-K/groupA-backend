@@ -6,16 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Responsibility {
 
     private String role_name;
-    private String resp_desc;
+    private List resp_desc;
 
 
-    public String getResp_desc() {
+    public List getResp_desc() {
         return resp_desc;
     }
 
-    public void setResp_desc(String resp_desc) {
-        this.resp_desc = resp_desc;
-    }
+    public void setResp_desc(List resp_desc) {this.resp_desc = resp_desc;}
 
     public String getRole_name() {
         return role_name;
@@ -30,7 +28,7 @@ public class Responsibility {
     @JsonCreator
     public Responsibility(
             @JsonProperty("role_name") String role_name,
-            @JsonProperty("resp_desc") String resp_desc
+            @JsonProperty("resp_desc") List resp_desc
     ) {
 
         this.role_name = role_name;
