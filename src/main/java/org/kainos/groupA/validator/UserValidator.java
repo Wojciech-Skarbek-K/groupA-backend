@@ -21,7 +21,7 @@ public class UserValidator {
         if (user.getPhone_number().length() >15) {
             throw new InvalidUserException("Phone number is too long");
         }
-        if (user.getPassword().length() != 61) {
+        if (user.getPassword().length() != 60) {
             throw new InvalidUserException("Invalid Password");
         }
         if (!user.getPassword().matches(encryption)) {
