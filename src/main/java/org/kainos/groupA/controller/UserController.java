@@ -34,7 +34,7 @@ public class UserController {
     @Path("/user/register")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(User user) throws FirstNameLengthException, LastNameLengthException, PhoneNumberLengthException, PasswordLengthException, PasswordContainsException, EmailContainsException, EmailLengthException, NotValidRoleException, NotValidLocationException {
+    public Response createUser(User user) throws InvalidUserException {
         if(userValidator.isValidUser(user)) {
             try {
                 return Response.ok(userService.createUser(user)).build();
