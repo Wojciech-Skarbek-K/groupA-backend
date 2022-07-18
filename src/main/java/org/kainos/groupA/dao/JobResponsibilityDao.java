@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobResponsibilityDao {
-    public List<Responsibility> getJobResponsibilityByID(Connection c, int roleID) throws SQLException, RespIDDoesNotExistException {
-        List<Responsibility> roles = new ArrayList<>();
+    public Responsibility getJobResponsibilityByID(Connection c, int roleID) throws SQLException, RespIDDoesNotExistException {
+        Responsibility responsibility = new Responsibility("", new ArrayList<>());
+        List <String> responsibilities = new ArrayList<>();
         try {
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
@@ -26,19 +27,17 @@ public class JobResponsibilityDao {
             }
             else{
                 do{
-                    Responsibility responsibility = new Responsibility(
-                            rs.getString("role_name"),
-                            rs.getString("resp_desc")
-                    );
-                    roles.add(responsibility);
+                    responsibility.setRole_name(rs.getString("role_name"));
+                    responsibilities.add(rs.getString("resp_desc"));
                 }while(rs.next());
+                responsibility.setResp_desc(responsibilities);
             }
         } catch(SQLException | RespIDDoesNotExistException e) {
             throw e;
         } finally {
             c.close();
         }
-        return roles;
+        return responsibility;
     }
 
 
