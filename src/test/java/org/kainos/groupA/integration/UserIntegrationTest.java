@@ -24,7 +24,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertTrue;
 public class UserIntegrationTest {
     User testUser =  new User(
             "test@kainos.com",
-            "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
+            "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcK",
             User.Role.Employee,
             "Joe",
             "Doe",
