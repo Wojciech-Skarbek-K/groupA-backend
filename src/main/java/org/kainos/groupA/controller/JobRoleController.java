@@ -56,17 +56,6 @@ public class JobRoleController {
         }
     }
 
-    @POST
-    @Path("/salesEmployee")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response createSalesEmployee(SalesEmployee salesEmployee) {
-        try {
-            salesEmployeeService.insertSalesEmployee(salesEmployee);
-            return Response.status(HttpStatus.CREATED_201).build();
-        } catch (SQLException | DatabaseConnectionException e) {
-            System.out.println(e);
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
-        }
-    }
+
 
 }
