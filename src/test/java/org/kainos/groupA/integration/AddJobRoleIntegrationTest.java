@@ -11,6 +11,7 @@ import org.kainos.groupA.GroupAApplication;
 import org.kainos.groupA.GroupAConfiguration;
 import org.kainos.groupA.models.AddJobRole;
 
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -36,5 +37,23 @@ public class AddJobRoleIntegrationTest {
                 .post(Entity.entity(jobRole, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
         Assertions.assertTrue(response.readEntity(Integer.class) > 0);
+    }
+
+   @Test
+    void createJobRole_withWrongParam_shouldReturnStatusCode400() {
+        jobRole.setSharepoint_url("notSharepointURL");
+        Response response = APP.client().target("http://localhost:8080/api/job-roles")
+                .request()
+                .post(Entity.entity(jobRole, MediaType.APPLICATION_JSON));
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST_400, response.getStatus());
+   }
+
+    @Test
+    void createJobRole_withoutParam_shouldReturnStatusCode500() {
+        jobRole.setRole_name(null);
+        Response response = APP.client().target("http://localhost:8080/api/job-roles")
+                .request()
+                .post(Entity.entity(jobRole, MediaType.APPLICATION_JSON));
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR_500, response.getStatus());
     }
 }
