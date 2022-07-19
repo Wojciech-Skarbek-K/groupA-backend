@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.groupA.GroupAApplication;
 import org.kainos.groupA.GroupAConfiguration;
+import org.kainos.groupA.models.LoginUser;
 import org.kainos.groupA.models.User;
 
 import javax.ws.rs.client.Entity;
@@ -55,14 +56,13 @@ public class UserIntegrationTest {
 
     @Test
     void createUser_shouldReturnCreatedUserId() {
-        //TODO: when we will have remove user endpoint, replace the email generator with
-        //deleting the user after creating it
         testUser.setEmail(generateEmail());
         Response response = APP.client().target("http://localhost:8080/api/user/register")
                 .request()
                 .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
         Assertions.assertTrue(response.readEntity(Integer.class) > 0);
+        //TODO: when we will have remove user endpoint, replace the email generator with deleting the user after the test
     }
 
     @Test
@@ -81,5 +81,23 @@ public class UserIntegrationTest {
                 .request()
                 .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR_500, response.getStatus());
+    }
+
+    @Test
+    void loginUser_shouldReturnJWTToken() {
+        //Create another user, separate for login testing, so we are 100% sure it exists.
+        testUser.setEmail(generateEmail());
+        Response response = APP.client().target("http://localhost:8080/api/user/register")
+                .request()
+                .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
+        Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
+        //Login with the users email and password.
+        LoginUser testLoginUser = new LoginUser(testUser.getEmail(), testUser.getPassword());
+        response = APP.client().target("http://localhost:8080/api/user/login")
+                .request()
+                .post(Entity.entity(testLoginUser, MediaType.APPLICATION_JSON));
+        Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
+        //TODO: Check if received response is JWTToken
+        //TODO: Delete the user after tests, after we have delete user endpoint
     }
 }
