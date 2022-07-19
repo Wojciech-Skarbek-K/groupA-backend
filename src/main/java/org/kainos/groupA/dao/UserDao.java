@@ -45,7 +45,24 @@ public class UserDao {
         return userId;
     }
 
-    public int loginUser(LoginUser loginUser, Connection c) {
-        return 0;
+    public int loginUser(LoginUser loginUser, Connection c) throws SQLException {
+        try {
+            String checkLoginQuery = "SELECT email, password FROM User WHERE email=? AND password=?";
+            PreparedStatement preparedSt = c.prepareStatement(checkLoginQuery, Statement.RETURN_GENERATED_KEYS);
+            preparedSt.setString(1, loginUser.getEmail());
+            preparedSt.setString(2, loginUser.getPassword());
+            ResultSet a = preparedSt.executeQuery();
+            if(a.next()) {
+                System.out.println(a.getString(1));
+                System.out.println(a.getString(2));
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            c.close();
+        }
     }
 }
