@@ -8,6 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddJobRoleDao {
+    /**
+     * Validates the input data for the new job role with a validator. If no issues occur, inserts a new job role
+     * into the database using a prepared statement. Returns the id of the newly created job role in the database.
+     * Throws SQLException on database errors and InvalidJobRoleException on an invalid job role.
+     *
+     * @param jobRole
+     * @param c
+     * @return job role id
+     * @throws SQLException
+     */
     public int addJobRole(AddJobRole jobRole, Connection c) throws SQLException {
         int jobRoleID = -1;
 
