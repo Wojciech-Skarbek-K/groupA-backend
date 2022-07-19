@@ -15,7 +15,7 @@ public class UserValidatorTest {
     public void isValidUser_shouldInvalidUserException_whenFirstNameTooLong() {
         User user = new User(
                 "orlagh@kainos.com",
-                "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7d5fcf",
                 Admin,
                 "Orlaghsdfghjkjhgfddfghjkfdhjkfdfghjkkgfdfghjertyuiodfghjklsdftyui",
                 "McCloskey",
@@ -31,7 +31,7 @@ public class UserValidatorTest {
     public void isValidUser_shouldThrowInvalidUserException_whenLastNameTooLong() {
         User user = new User(
                 "orlagh@kainos.com",
-                "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7d5fcf",
                 Admin,
                 "Orlagh",
                 "McCloskeysdfghjkjhgfddfghjkfdhjkfdfghjkkgfdfghjertyuiodfghjklsdftyui",
@@ -47,7 +47,7 @@ public class UserValidatorTest {
     public void isValidUser_shouldThrowInvalidUserException_whenPhoneNumberTooLong() {
         User user = new User(
                 "orlagh@kainos.com",
-                "$2b$10$ktJIlwDzSgj/kCgu3WaX/Or00YlPkye77zUSsDJtGZy/atH4c9xcKd",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7d5fcf",
                 Admin,
                 "Orlagh",
                 "McCloskey",
@@ -77,10 +77,10 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void isValidUser_shouldThrowInvalidUserException_whenPasswordDoesntEqual61() {
+    public void isValidUser_shouldThrowInvalidUserException_whenPasswordDoesntEqual64() {
         User user = new User(
                 "orlagh@kainos.com",
-                "Password123",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7",
                 Admin,
                 "Orlagh",
                 "McCloskey",
@@ -96,7 +96,7 @@ public class UserValidatorTest {
     public void isValidUser_shouldThrowInvalidUserException_whenEmailDoesntContainCorrectSyntax() {
         User user = new User(
                 "orlaghkainos.com",
-                "Password123!",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7d5fcf",
                 Admin,
                 "Orlagh",
                 "McCloskey",
@@ -112,7 +112,7 @@ public class UserValidatorTest {
     public void isValidUser_shouldThrowInvalidUserException_whenEmailDoesntContainCompanyDomain() {
         User user = new User(
                 "orlagh@kainoss.co.uk",
-                "Password123!",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7d5fcf",
                 Admin,
                 "Orlagh",
                 "McCloskey",
@@ -128,7 +128,7 @@ public class UserValidatorTest {
     public void isValidUser_shouldThrowInvalidUserException_whenEmailTooLong() {
         User user = new User(
                 "orlaghsdfghjkdsdfghjkkjhsasdfghjkkjhgfdsdfghjk@kainos.com",
-                "Password123!",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7d5fcf",
                 Admin,
                 "Orlagh",
                 "McCloskey",

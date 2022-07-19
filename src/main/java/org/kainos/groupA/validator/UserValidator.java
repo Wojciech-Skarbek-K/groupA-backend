@@ -21,12 +21,12 @@ public class UserValidator {
         if (user.getPhone_number().length() >15) {
             throw new InvalidUserException("Phone number is too long");
         }
-        if (user.getPassword().length() != 60) {
-            throw new InvalidUserException("Invalid Password");
+        if (user.getPassword().length() != 64) {
+            throw new InvalidUserException("Invalid password hash");
         }
-        if (!user.getPassword().matches(encryption)) {
+        /*if (!user.getPassword().matches(encryption)) {
             throw new InvalidUserException("Invalid password");
-        }
+        }*/
         if (user.getEmail().length() > 50) {
             throw new InvalidUserException("Email is too long");
         }
