@@ -9,7 +9,6 @@ import java.util.List;
 
 public class AddJobRoleDao {
     public int addJobRole(AddJobRole jobRole, Connection c) throws SQLException {
-        //List<JobRole> jobs = new ArrayList<>();
         int jobRoleID = -1;
 
         try {
