@@ -3,12 +3,13 @@ package org.kainos.groupA.validator;
 import org.kainos.groupA.exception.*;
 import org.kainos.groupA.models.User;
 
+import java.util.regex.Pattern;
 
 
 public class UserValidator {
 
     public boolean isValidUser(User user) throws  InvalidUserException {
-        String encryption = "([$2b$10$].*)"; //Matches a string that starts with '$2b$10$'
+        Pattern encryption = Pattern.compile("\\p{XDigit}+"); //Matches a string that is a hexadecimal string
         String companyDomain = "kainos.com";
         String email = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +  //part before @
                 companyDomain + "$";
@@ -24,9 +25,9 @@ public class UserValidator {
         if (user.getPassword().length() != 64) {
             throw new InvalidUserException("Invalid password hash");
         }
-        /*if (!user.getPassword().matches(encryption)) {
+        if (!encryption.matcher(user.getPassword()).matches()) {
             throw new InvalidUserException("Invalid password");
-        }*/
+        }
         if (user.getEmail().length() > 50) {
             throw new InvalidUserException("Email is too long");
         }
