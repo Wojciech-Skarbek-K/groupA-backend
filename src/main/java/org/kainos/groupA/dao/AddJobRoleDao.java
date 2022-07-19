@@ -1,5 +1,6 @@
 package org.kainos.groupA.dao;
 
+import org.kainos.groupA.models.AddJobRole;
 import org.kainos.groupA.models.JobRole;
 
 import java.sql.*;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddJobRoleDao {
-    public int addJobRole(JobRole jobRole, Connection c) throws SQLException {
+    public int addJobRole(AddJobRole jobRole, Connection c) throws SQLException {
         //List<JobRole> jobs = new ArrayList<>();
         int jobRoleID = -1;
 
