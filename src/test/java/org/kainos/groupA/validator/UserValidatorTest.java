@@ -64,7 +64,7 @@ public class UserValidatorTest {
     public void isValidUser_shouldThrowInvalidUserException_whenPasswordIsntEncrypted() {
         User user = new User(
                 "orlagh@kainos.com",
-                "Password!",
+                "0a3cb046627a5cf9d8b7d055b663780cd00e68ffd6b32dc2582b3cf77e7d5fct",
                 Admin,
                 "Orlagh",
                 "McCloskey",
