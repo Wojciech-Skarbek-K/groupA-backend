@@ -97,6 +97,7 @@ public class UserIntegrationTest {
                 .request()
                 .post(Entity.entity(testLoginUser, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
+        Assertions.assertTrue(response.readEntity(Integer.class) == 1);
         //TODO: Check if received response is JWTToken
         //TODO: Delete the user after tests, after we have delete user endpoint
     }
