@@ -13,6 +13,7 @@ import org.kainos.groupA.models.User;
 
 import javax.validation.constraints.Null;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -66,7 +67,7 @@ public class UserDao implements Authenticator<JwtContext, LoginUser> {
 
     public Map<String, String> loginUser(LoginUser loginUser, Connection c) throws SQLException, InvalidUserException, JoseException {
         try {
-            String checkLoginQuery = "SELECT email, password FROM User WHERE email=? AND password=?";
+            String checkLoginQuery = "SELECT email, role FROM User WHERE email=? AND password=?";
             PreparedStatement preparedSt = c.prepareStatement(checkLoginQuery, Statement.RETURN_GENERATED_KEYS);
             preparedSt.setString(1, loginUser.getEmail());
             preparedSt.setString(2, loginUser.getPassword());
@@ -80,8 +81,11 @@ public class UserDao implements Authenticator<JwtContext, LoginUser> {
                 jws.setPayload(claims.toJson());
                 jws.setAlgorithmHeaderValue(HMAC_SHA256);
                 jws.setKey(new HmacKey(tokenSecret));
+                Map<String, String> map = new HashMap<>();
+                map.put("token", jws.getCompactSerialization());
+                map.put("role", rs.getString(2));
 
-                return singletonMap("token", jws.getCompactSerialization());
+                return map;
             } else {
                 throw new InvalidUserException("Incorrect email or password.");
             }
