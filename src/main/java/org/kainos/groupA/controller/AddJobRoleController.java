@@ -39,7 +39,7 @@ public class AddJobRoleController {
                 try {
                     return Response.ok(jobRoleService.addJobRole(jobRole)).build();
                 } catch (SQLException | NullPointerException e) {
-                    return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
+                    return Response.status(HttpStatus.BAD_REQUEST_400).entity(e.getMessage()).build();
                 }
             } else {
                 return Response.status(HttpStatus.BAD_REQUEST_400).build();

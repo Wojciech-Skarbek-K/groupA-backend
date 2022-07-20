@@ -5,7 +5,7 @@ import org.kainos.groupA.exception.InvalidJobRoleException;
 import org.kainos.groupA.models.AddJobRole;
 import org.kainos.groupA.models.JobRole;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AddJobRoleValidatorTest {
 
@@ -62,4 +62,17 @@ public class AddJobRoleValidatorTest {
         assertThrows(InvalidJobRoleException.class,
                 () -> jobRoleValidator.isValidJobRole(jobRole));
     }
+
+    @Test
+    public void isValidJobRole_ShouldReturnTrue_WhenValidJobRole() throws InvalidJobRoleException {
+        AddJobRole jobRole = new AddJobRole(
+                "Software Engineer",
+                "Writing code, testing code, fixing code.",
+                "https://kainossoftwareltd.sharepoint.com/people/Job%20Specifications/test",
+                3,
+                5
+        );
+        assertTrue(jobRoleValidator.isValidJobRole(jobRole));
+    }
+
 }

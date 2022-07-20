@@ -49,11 +49,11 @@ public class AddJobRoleIntegrationTest {
    }
 
     @Test
-    void createJobRole_withoutParam_shouldReturnStatusCode500() {
+    void createJobRole_withoutParam_shouldReturnStatusCode400() {
         jobRole.setRole_name(null);
         Response response = APP.client().target("http://localhost:8080/api/job-roles")
                 .request()
                 .post(Entity.entity(jobRole, MediaType.APPLICATION_JSON));
-        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR_500, response.getStatus());
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST_400, response.getStatus());
     }
 }
