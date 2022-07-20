@@ -4,6 +4,7 @@ import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.eclipse.jetty.http.HttpStatus;
+import org.jose4j.json.internal.json_simple.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,10 +14,12 @@ import org.kainos.groupA.models.LoginUser;
 import org.kainos.groupA.models.User;
 
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.nio.charset.Charset;
+import java.util.Map;
 import java.util.Random;
 
 import static org.hibernate.validator.internal.util.Contracts.assertTrue;
@@ -84,7 +87,7 @@ public class UserIntegrationTest {
     }
 
     @Test
-    void loginUser_shouldReturnJWTToken() {
+    void loginUser_shouldReturnJWTTokenAndRole() {
         //Create another user, separate for login testing, so we are 100% sure it exists.
         testUser.setEmail(generateEmail());
         Response response = APP.client().target("http://localhost:8080/api/user/register")
@@ -97,8 +100,9 @@ public class UserIntegrationTest {
                 .request()
                 .post(Entity.entity(testLoginUser, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
-        Assertions.assertTrue(response.readEntity(Integer.class) == 1);
-        //TODO: Check if received response is JWTToken
-        //TODO: Delete the user after tests, after we have delete user endpoint
+        JSONObject json = new JSONObject(response.readEntity(new GenericType<Map<String, String>>(){}));
+        Assertions.assertNotNull(json.get("token"));
+        Assertions.assertNotNull(json.get("role"));
+        //TODO: Check if received response is JWTToken ?
     }
 }
