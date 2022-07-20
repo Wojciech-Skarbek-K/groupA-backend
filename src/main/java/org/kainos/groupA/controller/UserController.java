@@ -2,6 +2,7 @@ package org.kainos.groupA.controller;
 
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
+import org.jose4j.lang.JoseException;
 import org.kainos.groupA.dao.UserDao;
 import org.kainos.groupA.exception.*;
 import org.kainos.groupA.models.LoginUser;
@@ -25,9 +26,9 @@ public class UserController {
     private static UserService userService;
     private static UserValidator userValidator;
 
-    public UserController() {
+    public UserController(byte[] tokenSecret) {
         DatabaseConnector databaseConnector = new DatabaseConnector();
-        userService = new UserService(databaseConnector, new UserDao());
+        userService = new UserService(databaseConnector, new UserDao(tokenSecret));
         userValidator = new UserValidator();
     }
 
@@ -58,7 +59,7 @@ public class UserController {
     public Response loginUser(LoginUser loginUser) throws InvalidUserException {
         try {
             return Response.ok(userService.loginUser(loginUser)).build();
-        } catch (SQLException e) {
+        } catch (SQLException | JoseException e) {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
         }
     }

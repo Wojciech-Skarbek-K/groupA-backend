@@ -1,5 +1,6 @@
 package org.kainos.groupA.service;
 
+import org.jose4j.lang.JoseException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.groupA.dao.UserDao;
@@ -56,7 +57,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void loginUser_shouldThrowSqlException_whenThrowsSqlException() throws SQLException {
+    void loginUser_shouldThrowSqlException_whenThrowsSqlException() throws SQLException, JoseException, InvalidUserException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(userDao.loginUser(testLoginUser, conn)).thenThrow(SQLException.class);
         assertThrows(SQLException.class, () -> userService.loginUser(testLoginUser));

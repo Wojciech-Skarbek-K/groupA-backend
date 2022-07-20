@@ -3,7 +3,9 @@ package org.kainos.groupA.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LoginUser {
+import java.security.Principal;
+
+public class LoginUser implements Principal {
     private String email;
     private String password;
 
@@ -30,5 +32,10 @@ public class LoginUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String getName() {
+        return email;
     }
 }
