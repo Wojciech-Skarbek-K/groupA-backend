@@ -59,7 +59,7 @@ public class UserController {
     public Response loginUser(LoginUser loginUser) throws InvalidUserException {
         try {
             return Response.ok(userService.loginUser(loginUser)).build();
-        } catch (SQLException | JoseException e) {
+        } catch (SQLException | JoseException | InvalidUserException e) {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).entity(e.getMessage()).build();
         }
     }
