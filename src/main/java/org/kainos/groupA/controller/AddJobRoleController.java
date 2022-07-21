@@ -34,11 +34,10 @@ public class AddJobRoleController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addJobRole(AddJobRole jobRole) throws InvalidJobRoleException {
-                try {
-                    return Response.ok(jobRoleService.addJobRole(jobRole)).build();
-                } catch (SQLException | NullPointerException | InvalidJobRoleException e) {
-                    return Response.status(HttpStatus.BAD_REQUEST_400).entity(e.getMessage()).build();
-
-                }
+        try {
+            return Response.ok(jobRoleService.addJobRole(jobRole)).build();
+        } catch (SQLException | NullPointerException | InvalidJobRoleException e) {
+            return Response.status(HttpStatus.BAD_REQUEST_400).entity(e.getMessage()).build();
+        }
     }
 }
