@@ -16,9 +16,8 @@ public class GroupAConfiguration extends io.dropwizard.Configuration {
     @NotNull
     private final SwaggerBundleConfiguration swagger = new SwaggerBundleConfiguration();
 
-    //TODO: Hide it in secrets maybe?
     @NotEmpty
-    private String jwtTokenSecret = "dfwzsdzwh823zebdwdz772632gdsbd";
+    private String jwtTokenSecret = System.getenv("JWT_TOKEN_SECRET");
 
     /**
      * Setups swagger by telling it where the controllers are. Returns swagger configuration as object.

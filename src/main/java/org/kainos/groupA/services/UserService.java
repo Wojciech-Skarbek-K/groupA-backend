@@ -24,7 +24,7 @@ public class UserService {
         return userDao.createUser(user, databaseConnector.getConnection());
     }
 
-    public Map<String, String> loginUser(LoginUser loginUser) throws SQLException, JoseException, InvalidUserException {
+    public String loginUser(LoginUser loginUser) throws SQLException, JoseException, InvalidUserException {
         return userDao.loginUser(loginUser, databaseConnector.getConnection());
     }
 }

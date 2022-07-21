@@ -87,22 +87,20 @@ public class UserIntegrationTest {
     }
 
     @Test
-    void loginUser_shouldReturnJWTTokenAndRole() {
+    void loginUser_shouldReturnJWTToken() {
         //Create another user, separate for login testing, so we are 100% sure it exists.
         testUser.setEmail(generateEmail());
         Response response = APP.client().target("http://localhost:8080/api/user/register")
                 .request()
                 .post(Entity.entity(testUser, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
+
         //Login with the users email and password.
         LoginUser testLoginUser = new LoginUser(testUser.getEmail(), testUser.getPassword());
         response = APP.client().target("http://localhost:8080/api/user/login")
                 .request()
                 .post(Entity.entity(testLoginUser, MediaType.APPLICATION_JSON));
         Assertions.assertEquals(HttpStatus.OK_200, response.getStatus());
-        JSONObject json = new JSONObject(response.readEntity(new GenericType<Map<String, String>>(){}));
-        Assertions.assertNotNull(json.get("token"));
-        Assertions.assertNotNull(json.get("role"));
-        //TODO: Check if received response is JWTToken ?
+        Assertions.assertNotNull(response.getEntity());
     }
 }

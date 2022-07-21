@@ -8,6 +8,7 @@ DB_USERNAME
 DB_PASSWORD
 DB_HOST
 DB_NAME
+JWT_TOKEN_SECRET
 ```
 ### Running the application
 ```bash
