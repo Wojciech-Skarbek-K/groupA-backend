@@ -28,4 +28,5 @@ jobs:
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_NAME: ${{ secrets.DB_NAME }}
+          JWT_TOKEN_SECRET: ${{ secrets.JWT_TOKEN_SECRET }}
         run: mvn clean test integration-test
