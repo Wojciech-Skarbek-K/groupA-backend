@@ -1,5 +1,6 @@
 package org.kainos.groupA.dao;
 
+import org.kainos.groupA.exception.InvalidJobRoleException;
 import org.kainos.groupA.models.AddJobRole;
 import org.kainos.groupA.models.JobRole;
 
@@ -18,7 +19,7 @@ public class AddJobRoleDao {
      * @return job role id
      * @throws SQLException
      */
-    public int addJobRole(AddJobRole jobRole, Connection c) throws SQLException {
+    public int addJobRole(AddJobRole jobRole, Connection c) throws SQLException, InvalidJobRoleException {
         int jobRoleID = -1;
 
         try {

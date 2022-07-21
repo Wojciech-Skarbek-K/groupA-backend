@@ -31,6 +31,13 @@ public class AddJobRoleServiceTest {
             1,
             1);
 
+    AddJobRole invalidRole = new AddJobRole(
+            "Kainos New Role",
+            "This is a new kainos job role",
+            "hello",
+            1,
+            1);
+
     @Test
     void createJobRole_shouldReturnJobRoleID_whenReturnsCreatedJobRoleID() throws SQLException, InvalidJobRoleException {
         int exceptedResult = 1;
@@ -41,11 +48,17 @@ public class AddJobRoleServiceTest {
     }
 
     @Test
-    void createJobRole_shouldThrowSqlException_whenThrowsSqlException() throws SQLException {
+    void createJobRole_shouldThrowSqlException_whenThrowsSqlException() throws SQLException, InvalidJobRoleException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(addJobRoleDao.addJobRole(testRole, conn)).thenThrow(SQLException.class);
         assertThrows(SQLException.class, () -> addJobRoleService.addJobRole(testRole));
     }
 
+    @Test
+    void createJobRole_shouldReturnFalse_whenFails() throws InvalidJobRoleException, SQLException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(addJobRoleDao.addJobRole(invalidRole, conn)).thenThrow(InvalidJobRoleException.class);
+        assertThrows(InvalidJobRoleException.class, () -> addJobRoleService.addJobRole(invalidRole));
+    }
 
 }
