@@ -69,7 +69,7 @@ public class UserDao implements Authenticator<JwtContext, LoginUser> {
         try {
             String checkLoginQuery = "SELECT email, role FROM User WHERE email=? AND password=?";
             PreparedStatement preparedSt = c.prepareStatement(checkLoginQuery, Statement.RETURN_GENERATED_KEYS);
-            preparedSt.setString(1, loginUser.getEmail());
+            preparedSt.setString(1, loginUser.getName());
             preparedSt.setString(2, loginUser.getPassword());
             ResultSet rs = preparedSt.executeQuery();
             if(rs.next()) {
