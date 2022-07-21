@@ -20,7 +20,7 @@ import java.util.Optional;
 import static java.util.Collections.singletonMap;
 import static org.jose4j.jws.AlgorithmIdentifiers.HMAC_SHA256;
 
-public class UserDao implements Authenticator<JwtContext, LoginUser> {
+public class UserDao {
 
     private final byte[] tokenSecret;
 
@@ -65,7 +65,7 @@ public class UserDao implements Authenticator<JwtContext, LoginUser> {
         return userId;
     }
 
-    public Map<String, String> loginUser(LoginUser loginUser, Connection c) throws SQLException, InvalidUserException, JoseException {
+    public String loginUser(LoginUser loginUser, Connection c) throws SQLException, InvalidUserException, JoseException {
         try {
             String checkLoginQuery = "SELECT email, role FROM User WHERE email=? AND password=?";
             PreparedStatement preparedSt = c.prepareStatement(checkLoginQuery, Statement.RETURN_GENERATED_KEYS);
@@ -81,11 +81,7 @@ public class UserDao implements Authenticator<JwtContext, LoginUser> {
                 jws.setPayload(claims.toJson());
                 jws.setAlgorithmHeaderValue(HMAC_SHA256);
                 jws.setKey(new HmacKey(tokenSecret));
-                Map<String, String> map = new HashMap<>();
-                map.put("token", jws.getCompactSerialization());
-                map.put("role", rs.getString(2));
-
-                return map;
+                return jws.getCompactSerialization();
             } else {
                 throw new InvalidUserException("Incorrect email or password.");
             }
@@ -98,9 +94,4 @@ public class UserDao implements Authenticator<JwtContext, LoginUser> {
         }
     }
 
-
-    @Override
-    public Optional<LoginUser> authenticate(JwtContext jwtContext) throws AuthenticationException {
-        return Optional.empty();
-    }
 }

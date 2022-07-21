@@ -12,8 +12,8 @@ import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 import org.jose4j.keys.HmacKey;
 import org.kainos.groupA.controller.*;
-import org.kainos.groupA.dao.UserDao;
-import org.kainos.groupA.models.LoginUser;
+import org.kainos.groupA.models.AuthUser;
+import org.kainos.groupA.utils.JwtAuthenticator;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
@@ -59,11 +59,11 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
                 .build(); // create the JwtConsumer instance
 
         environment.jersey().register(new AuthDynamicFeature(
-                new JwtAuthFilter.Builder<LoginUser>()
+                new JwtAuthFilter.Builder<AuthUser>()
                         .setJwtConsumer(consumer)
                         .setRealm("realm")
                         .setPrefix("Bearer")
-                        .setAuthenticator(new UserDao(configuration.getJwtTokenSecret()))
+                        .setAuthenticator(new JwtAuthenticator(configuration.getJwtTokenSecret()))
                         .buildAuthFilter()));
 
         //Controllers
