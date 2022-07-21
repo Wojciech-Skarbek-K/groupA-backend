@@ -34,7 +34,11 @@ public class AddJobRoleServiceTest {
     AddJobRole invalidRole = new AddJobRole(
             "Kainos New Role",
             "This is a new kainos job role",
+<<<<<<< HEAD
             "hello",
+=======
+            "https://kainossoftwareltd.sharepoint.com/people/Job%2",
+>>>>>>> 6dee420f394b9553351ab88ee1751a2031a42669
             1,
             1);
 
@@ -45,6 +49,17 @@ public class AddJobRoleServiceTest {
         Mockito.when(addJobRoleDao.addJobRole(testRole, conn)).thenReturn(exceptedResult);
         int result = addJobRoleService.addJobRole(testRole);
         assertEquals(result, exceptedResult);
+    }
+
+    //needs test for isValidJobRole returns false
+    @Test
+    void createJobRole_shouldReturnFalse_whenFails() throws SQLException, InvalidJobRoleException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(addJobRoleDao.addJobRole(testRole, conn)).thenThrow(SQLException.class);
+        assertThrows(SQLException.class, () -> addJobRoleService.addJobRole(testRole));
+        Mockito.when(addJobRoleDao.addJobRole(invalidRole, conn)).thenThrow(SQLException.class);
+        assertThrows(InvalidJobRoleException.class, () -> addJobRoleService.addJobRole(invalidRole));
+
     }
 
     @Test
