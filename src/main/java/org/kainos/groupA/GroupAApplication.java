@@ -17,6 +17,7 @@ import org.kainos.groupA.utils.JwtAuthenticator;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import org.kainos.groupA.controller.*;
 
 /**
  * Main class of the application.
@@ -71,8 +72,6 @@ public class GroupAApplication extends io.dropwizard.Application<GroupAConfigura
         environment.jersey().register(new JobRoleController());
         environment.jersey().register(new BandCompController());
         environment.jersey().register(new JobResponsibilityController());
-        //Authentication
-        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(Principal.class));
-        environment.jersey().register(RolesAllowedDynamicFeature.class);
+        environment.jersey().register(new AddJobRoleController());
     }
 }

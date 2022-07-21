@@ -2,10 +2,13 @@ package org.kainos.groupA.controller;
 
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
-import org.kainos.groupA.models.JobRole;
+import org.kainos.groupA.exception.InvalidJobRoleException;
+import org.kainos.groupA.models.AddJobRole;
 import org.kainos.groupA.dao.JobRoleDao;
+import org.kainos.groupA.services.AddJobRoleService;
 import org.kainos.groupA.utils.DatabaseConnector;
 import org.kainos.groupA.services.JobRoleService;
+import org.kainos.groupA.validator.AddJobRoleValidator;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -36,7 +39,7 @@ public class JobRoleController {
     public Response getJobRoles() throws SQLException {
         try {
             return Response.ok(jobRoleService.getJobRoles()).build();
-        } catch ( SQLException e) {
+        } catch (SQLException e) {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
