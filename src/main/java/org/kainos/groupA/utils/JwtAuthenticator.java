@@ -37,6 +37,7 @@ public class JwtAuthenticator implements Authenticator<JwtContext, AuthUser> {
         return jws;
     }
 
+
     @Override
     public Optional<AuthUser> authenticate(JwtContext jwtContext) throws AuthenticationException {
         try {
