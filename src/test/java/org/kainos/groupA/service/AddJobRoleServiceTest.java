@@ -3,6 +3,7 @@ package org.kainos.groupA.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kainos.groupA.dao.AddJobRoleDao;
+import org.kainos.groupA.exception.InvalidJobRoleException;
 import org.kainos.groupA.models.AddJobRole;
 import org.kainos.groupA.services.AddJobRoleService;
 import org.kainos.groupA.utils.DatabaseConnector;
@@ -31,7 +32,7 @@ public class AddJobRoleServiceTest {
             1);
 
     @Test
-    void createJobRole_shouldReturnJobRoleID_whenReturnsCreatedJobRoleID() throws SQLException {
+    void createJobRole_shouldReturnJobRoleID_whenReturnsCreatedJobRoleID() throws SQLException, InvalidJobRoleException {
         int exceptedResult = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(addJobRoleDao.addJobRole(testRole, conn)).thenReturn(exceptedResult);
