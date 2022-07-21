@@ -6,24 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.security.Principal;
 
 public class LoginUser implements Principal {
-    private String email;
+    private String name;
     private String password;
 
     @JsonCreator
     public LoginUser(
-            @JsonProperty("email") String email,
+            @JsonProperty("email") String name,
             @JsonProperty("password") String password
     ) {
-        this.email = email;
+        this.name = name;
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -36,6 +28,10 @@ public class LoginUser implements Principal {
 
     @Override
     public String getName() {
-        return email;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
