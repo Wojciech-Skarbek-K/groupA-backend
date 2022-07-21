@@ -34,7 +34,6 @@ public class AddJobRoleController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addJobRole(AddJobRole jobRole) throws InvalidJobRoleException {
-<<<<<<< HEAD
                 try {
                     return Response.ok(jobRoleService.addJobRole(jobRole)).build();
                 } catch (NullPointerException | InvalidJobRoleException e) {
@@ -42,12 +41,5 @@ public class AddJobRoleController {
                 } catch (SQLException e) {
                     return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
                 }
-=======
-        try {
-            return Response.ok(jobRoleService.addJobRole(jobRole)).build();
-        } catch (SQLException | NullPointerException | InvalidJobRoleException e) {
-            return Response.status(HttpStatus.BAD_REQUEST_400).entity(e.getMessage()).build();
-        }
->>>>>>> 6dee420f394b9553351ab88ee1751a2031a42669
     }
 }
