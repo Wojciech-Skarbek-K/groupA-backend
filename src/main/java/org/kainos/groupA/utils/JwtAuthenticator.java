@@ -36,7 +36,6 @@ public class JwtAuthenticator implements Authenticator<JwtContext, AuthUser> {
         jws.setKey(new HmacKey(jwtTokenSecret));
         return jws;
     }
-
     @Override
     public Optional<AuthUser> authenticate(JwtContext jwtContext) throws AuthenticationException {
         try {
